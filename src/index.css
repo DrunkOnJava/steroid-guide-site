@@ -4,44 +4,73 @@
 
 @layer base {
   html {
-    @apply bg-gray-50;
+    @apply bg-gray-50 scroll-smooth;
   }
 
   body {
-    @apply antialiased text-gray-700;
+    @apply antialiased text-gray-700 leading-relaxed;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold tracking-tight text-gray-900;
+  }
+
+  a {
+    @apply transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-sm;
+  }
+
+  p {
+    @apply text-gray-600 leading-relaxed;
+  }
+
+  code {
+    @apply font-mono text-sm;
   }
 }
 
 @layer components {
   .nav-link {
-    @apply px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors duration-200;
+    @apply px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-all duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-600 hover:after:w-full after:transition-all after:duration-200;
   }
 
   .nav-link-active {
-    @apply text-blue-600;
+    @apply text-blue-600 after:w-full;
   }
 
   .sidebar-link {
-    @apply block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-blue-600 transition-all duration-200;
+    @apply block px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50/50 hover:text-blue-600 transition-all duration-200 rounded-sm;
   }
 
   .sidebar-link-active {
-    @apply bg-blue-50 text-blue-600 font-medium;
+    @apply bg-blue-50 text-blue-600 font-medium border-r-2 border-blue-600;
   }
 
   .card {
-    @apply bg-white rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow duration-200;
+    @apply bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all duration-200 hover:border-blue-100;
   }
 
   .btn {
-    @apply px-4 py-2 rounded-md font-medium transition-colors duration-200;
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 inline-flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed;
   }
 
   .btn-primary {
-    @apply bg-blue-600 text-white hover:bg-blue-700;
+    @apply bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500 shadow-sm hover:shadow active:bg-blue-800;
   }
 
   .btn-secondary {
-    @apply bg-gray-100 text-gray-700 hover:bg-gray-200;
+    @apply bg-gray-100 text-gray-700 hover:bg-gray-200 focus:ring-gray-500 border border-gray-200 hover:border-gray-300 active:bg-gray-300;
+  }
+
+  .input {
+    @apply block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm transition-colors duration-200;
+  }
+
+  .select {
+    @apply block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm transition-colors duration-200;
   }
 }

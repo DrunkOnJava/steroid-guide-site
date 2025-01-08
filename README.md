@@ -1,50 +1,111 @@
-# React + TypeScript + Vite
+# First Cycle Guide - React Documentation Site
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A comprehensive guide for first-time steroid cycle users, built with React, Tailwind CSS, and deployed on Netlify.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 📱 Responsive design
+- 📖 Markdown content support
+- 🎨 Modern UI with Tailwind CSS
+- 📊 Interactive tables and components
+- 🔄 Client-side routing
+- 📱 Mobile-friendly navigation
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- React
+- TypeScript
+- Tailwind CSS
+- React Router
+- React Markdown
+- Vite
 
-- Configure the top-level `parserOptions` property like this:
+## Local Development
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+1. Clone the repository:
+
+```bash
+git clone <repository-url>
+cd steroid-guide-site
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+2. Install dependencies:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm install
 ```
+
+3. Start the development server:
+
+```bash
+npm run dev
+```
+
+4. Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+## Building for Production
+
+1. Create a production build:
+
+```bash
+npm run build
+```
+
+2. Preview the production build:
+
+```bash
+npm run preview
+```
+
+## Deployment
+
+This site is configured for deployment on Netlify. To deploy:
+
+1. Push your code to a Git repository
+2. Connect your repository to Netlify
+3. Configure the build settings:
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+   - Node version: 18.x
+
+The site will automatically deploy when changes are pushed to the main branch.
+
+## Project Structure
+
+```
+steroid-guide-site/
+├── public/
+│   └── content/         # Markdown content files
+├── src/
+│   ├── components/      # React components
+│   ├── pages/          # Page components
+│   └── App.tsx         # Main application component
+├── index.html
+├── package.json
+├── tailwind.config.js
+├── tsconfig.json
+└── vite.config.ts
+```
+
+## Content Management
+
+The site content is organized in markdown files under `public/content/`. Each section has its own file:
+
+- `01_introduction.md`
+- `02_cycle_overview.md`
+- `03_pharmacological_profiles.md`
+- `04_training_nutrition.md`
+- `05_glossary.md`
+- `06_safety_considerations.md`
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+## License
+
+This project is private and confidential. All rights reserved.
