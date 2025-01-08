@@ -1,31 +1,29 @@
-# First Cycle Guide - React Documentation Site
+# Steroid Guide Site
 
-A comprehensive guide for first-time steroid cycle users, built with React, Tailwind CSS, and deployed on Netlify.
+A comprehensive web application providing educational information and guidance about steroids, including cycle management, compound information, and safety considerations.
 
 ## Features
 
-- 📱 Responsive design
-- 📖 Markdown content support
-- 🎨 Modern UI with Tailwind CSS
-- 📊 Interactive tables and components
-- 🔄 Client-side routing
-- 📱 Mobile-friendly navigation
+- 📊 Cycle Overview and Management
+- 💊 Detailed Compound Information
+- 📅 Medication Schedule
+- 🏋️ Training and Nutrition Guidelines
+- 🔒 Safety Considerations
+- 📖 Comprehensive Glossary
 
 ## Tech Stack
 
 - React
 - TypeScript
 - Tailwind CSS
-- React Router
-- React Markdown
 - Vite
 
-## Local Development
+## Getting Started
 
 1. Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/drunkonjava/steroid-guide-site.git
 cd steroid-guide-site
 ```
 
@@ -41,71 +39,20 @@ npm install
 npm run dev
 ```
 
-4. Open [http://localhost:5173](http://localhost:5173) in your browser.
+4. Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
 
-## Building for Production
+## Available Scripts
 
-1. Create a production build:
-
-```bash
-npm run build
-```
-
-2. Preview the production build:
-
-```bash
-npm run preview
-```
-
-## Deployment
-
-This site is configured for deployment on Netlify. To deploy:
-
-1. Push your code to a Git repository
-2. Connect your repository to Netlify
-3. Configure the build settings:
-   - Build command: `npm run build`
-   - Publish directory: `dist`
-   - Node version: 18.x
-
-The site will automatically deploy when changes are pushed to the main branch.
-
-## Project Structure
-
-```
-steroid-guide-site/
-├── public/
-│   └── content/         # Markdown content files
-├── src/
-│   ├── components/      # React components
-│   ├── pages/          # Page components
-│   └── App.tsx         # Main application component
-├── index.html
-├── package.json
-├── tailwind.config.js
-├── tsconfig.json
-└── vite.config.ts
-```
-
-## Content Management
-
-The site content is organized in markdown files under `public/content/`. Each section has its own file:
-
-- `01_introduction.md`
-- `02_cycle_overview.md`
-- `03_pharmacological_profiles.md`
-- `04_training_nutrition.md`
-- `05_glossary.md`
-- `06_safety_considerations.md`
+- `npm run dev` - Starts the development server
+- `npm run build` - Builds the app for production
+- `npm run lint` - Runs ESLint
+- `npm run typecheck` - Runs TypeScript type checking
+- `npm test` - Runs tests (when implemented)
 
 ## Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Open a Pull Request
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
 ## License
 
-This project is private and confidential. All rights reserved.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
