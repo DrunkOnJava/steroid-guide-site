@@ -184,7 +184,6 @@ export interface MedicationCard {
 }
 
 export const generateMedicationCard = (
-  schedule: Schedule,
   medication: Schedule["medications"][0]
 ): MedicationCard => {
   return {
