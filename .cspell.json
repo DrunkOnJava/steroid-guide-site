@@ -1,0 +1,28 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "steroid",
+    "markdownlint",
+    "cspell",
+    "headlessui",
+    "heroicons",
+    "tailwindcss",
+    "vitest",
+    "vite",
+    "pkill",
+    "sitemap",
+    "netlify",
+    "tsx",
+    "jsdom"
+  ],
+  "ignorePaths": [
+    "node_modules/**",
+    "dist/**",
+    "coverage/**",
+    "*.lock",
+    "package-lock.json"
+  ],
+  "allowCompoundWords": true,
+  "ignoreRegExpList": ["\\(.*\\)", "\\[.*\\]", "/.*/"]
+}

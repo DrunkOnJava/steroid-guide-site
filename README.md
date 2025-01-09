@@ -300,7 +300,14 @@ git clone https://github.com/drunkonjava/steroid-guide-site.git
 cd steroid-guide-site
 ```
 
-2. Install dependencies:
+2. Install VSCode Extensions:
+   - GitHub Actions (github.vscode-github-actions)
+   - markdownlint (davidanson.vscode-markdownlint)
+   - Code Spell Checker (streetsidesoftware.code-spell-checker)
+
+These extensions are recommended in `.vscode/extensions.json` and should be automatically suggested by VSCode.
+
+3. Install dependencies:
 
 ```bash
 npm install
@@ -316,11 +323,69 @@ npm run dev
 
 ## Available Scripts
 
+### Development
+
 - `npm run dev` - Starts the development server
-- `npm run build` - Builds the app for production
+- `npm run build` - Builds the app for production, generates sitemap, and captures screenshots
 - `npm run lint` - Runs ESLint
 - `npm run typecheck` - Runs TypeScript type checking
 - `npm test` - Runs tests (when implemented)
+
+### Documentation
+
+- `npm run screenshots` - Manually captures full-page screenshots of all routes
+- `npm run lint:md` - Checks markdown files for style consistency
+- `npm run check:links` - Validates all documentation links
+- `npm run check:spelling` - Performs spell checking on documentation
+- `npm run test:code-examples` - Tests code examples in documentation
+
+### Documentation Automation
+
+The project includes comprehensive documentation automation through GitHub Actions:
+
+1. **Quality Checks**:
+
+   - Markdown style consistency
+   - Link validation
+   - Spell checking
+   - Code example testing
+   - Documentation size monitoring
+
+2. **Automated Updates**:
+
+   - Sitemap generation
+   - File header management
+   - Pull request creation with detailed reports
+
+3. **Configuration**:
+   - `.markdownlint.json` - Markdown style rules
+   - `.cspell.json` - Custom dictionary and spell check settings
+
+The documentation workflow runs automatically when documentation files are changed and creates a pull request with updates and check results. The workflow can be monitored and managed directly in VSCode through the GitHub Actions tab, which provides:
+
+- Real-time workflow status
+- Detailed logs and error messages
+- Ability to manually trigger workflows
+- Quick access to workflow runs and artifacts
+- Visual workflow graphs
+- Security analysis
+
+The VSCode GitHub Actions integration is pre-configured through `.vscode/settings.json` with optimized settings for workflow visualization and management.
+
+### Automated Screenshots
+
+The build process automatically captures full-page screenshots of every route in the application. These screenshots are saved in the `/screenshots` directory and include:
+
+- Home page
+- Introduction
+- Cycle Overview
+- Compounds
+- Training & Nutrition
+- Glossary
+- Safety
+- Schedule
+
+Screenshots are automatically updated during each build to ensure they reflect the latest version of the site. This helps with visual regression testing and documentation. You can also manually capture screenshots using `npm run screenshots` (requires the development server to be running).
 
 ## Contributing
 

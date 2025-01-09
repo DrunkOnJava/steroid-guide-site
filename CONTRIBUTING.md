@@ -21,7 +21,49 @@ Pull requests are the best way to propose changes to the codebase. We actively w
 3. If you've changed APIs, update the documentation.
 4. Ensure the test suite passes.
 5. Make sure your code lints.
-6. Issue that pull request!
+6. For documentation changes:
+   - Run `npm run lint:md` to check markdown style
+   - Run `npm run check:links` to verify all links are valid
+   - Run `npm run check:spelling` to catch spelling errors
+   - Run `npm run test:code-examples` to validate code examples
+   - Keep documentation files under 10MB total size
+7. Issue that pull request!
+
+## Documentation Quality Standards
+
+We maintain high documentation quality through automated checks:
+
+1. **Markdown Style**: We follow consistent markdown formatting rules defined in `.markdownlint.json`. Common guidelines include:
+
+   - Consistent header hierarchy
+   - Proper list formatting
+   - Code block syntax
+   - Line length and spacing
+
+2. **Link Validation**: All links in documentation must be valid and accessible. This includes:
+
+   - Internal repository links
+   - External references
+   - API documentation links
+   - Image references
+
+3. **Spell Checking**: Documentation is spell-checked against:
+
+   - Standard English dictionary
+   - Project-specific terms in `.cspell.json`
+   - Technical terminology
+
+4. **Code Examples**: All code examples in documentation must be:
+
+   - Syntactically correct
+   - Properly formatted
+   - Actually runnable
+   - Up to date with current APIs
+
+5. **Size Management**: To maintain performance:
+   - Keep individual markdown files concise
+   - Optimize images
+   - Total documentation size should stay under 10MB
 
 ## Any contributions you make will be under the MIT Software License
 
@@ -42,6 +84,18 @@ We use GitHub issues to track public bugs. Report a bug by [opening a new issue]
 - What you expected would happen
 - What actually happens
 - Notes (possibly including why you think this might be happening, or stuff you tried that didn't work)
+- Screenshots (the project automatically generates screenshots during builds, check the `/screenshots` directory for reference)
+
+## Visual Changes and Screenshots
+
+The project maintains a collection of full-page screenshots for every route in the `/screenshots` directory. These are automatically updated during the build process to help track visual changes:
+
+1. When making UI changes, run `npm run build` to update the screenshots
+2. Include relevant screenshot changes in your pull request
+3. Review the screenshot diffs to ensure your changes have the intended visual impact
+4. For visual bugs, reference the relevant screenshots from the `/screenshots` directory
+
+You can also manually capture screenshots using `npm run screenshots` (requires the development server to be running) if you need to document specific states or conditions.
 
 ## License
 
