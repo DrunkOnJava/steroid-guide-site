@@ -1,3 +1,33 @@
+/*
+ * @fileoverview Core application styles and animations
+ * @project     Steroid Guide Site (v0.0.0)
+ * @module      App
+ *
+ * @author      Steroid Guide Team <team@steroidguide.com>
+ * @contributors
+ * @maintainer  Steroid Guide Team <team@steroidguide.com>
+ *
+ * @created     2024-03-19
+ * @modified    2024-03-19
+ * @version     1.0.0
+ *
+ * @license     MIT - see LICENSE.md file in root directory
+ * @copyright   Copyright (c) 2024 Steroid Guide
+ *
+ * Style Categories:
+ * - Layout (root container)
+ * - Logo animations and effects
+ * - Card components
+ * - Documentation styles
+ *
+ * Features:
+ * - Responsive container sizing
+ * - Hover effects
+ * - Animated transitions
+ * - Motion preferences support
+ */
+
+/* Layout Styles */
 #root {
   max-width: 1280px;
   margin: 0 auto;

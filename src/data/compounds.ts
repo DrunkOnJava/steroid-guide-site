@@ -1,3 +1,66 @@
+/**
+ * @fileoverview Compound information and details data source
+ * @project     Steroid Guide Site (v0.0.0)
+ * @module      compounds
+ *
+ * @author      Steroid Guide Team <team@steroidguide.com>
+ * @contributors
+ * @maintainer  Steroid Guide Team <team@steroidguide.com>
+ *
+ * @created     2024-03-19
+ * @modified    2024-03-19
+ * @version     1.0.0
+ *
+ * @license     MIT - see LICENSE.md file in root directory
+ * @copyright   Copyright (c) 2024 Steroid Guide
+ *
+ * @description
+ * Comprehensive data source containing detailed information about various
+ * compounds used in cycles. Includes pharmacological details, benefits,
+ * considerations, and usage guidelines for each compound.
+ *
+ * Compound Categories:
+ * - Anabolic-androgenic steroids
+ * - Peptide hormones
+ * - Enzyme inhibitors
+ * - SERMs for PCT
+ *
+ * Data Structure:
+ * - Compound properties
+ * - Usage schedules
+ * - Benefits lists
+ * - Consideration points
+ *
+ * Information Types:
+ * - Pharmacological profiles
+ * - Half-life data
+ * - Administration schedules
+ * - Safety considerations
+ *
+ * @example
+ * ```tsx
+ * import { compounds } from './data/compounds';
+ *
+ * function CompoundList() {
+ *   return (
+ *     <div>
+ *       {compounds.map(compound => (
+ *         <CompoundCard key={compound.name} compound={compound} />
+ *       ))}
+ *     </div>
+ *   );
+ * }
+ * ```
+ *
+ * @dependencies
+ * - CompoundDetails type from types/compounds
+ *
+ * @requirements
+ * - Accurate pharmacological data
+ * - Type safety enforcement
+ * - Regular data updates
+ */
+
 import { CompoundDetails } from "../types/compounds";
 
 export const compounds: CompoundDetails[] = [

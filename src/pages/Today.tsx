@@ -1,3 +1,72 @@
+/**
+ * @fileoverview Real-time cycle tracking and daily medication management page
+ * @project     Steroid Guide Site (v0.0.0)
+ * @module      Today
+ *
+ * @author      Steroid Guide Team <team@steroidguide.com>
+ * @contributors
+ * @maintainer  Steroid Guide Team <team@steroidguide.com>
+ *
+ * @created     2024-03-19
+ * @modified    2024-03-19
+ * @version     1.0.0
+ *
+ * @license     MIT - see LICENSE.md file in root directory
+ * @copyright   Copyright (c) 2024 Steroid Guide
+ *
+ * @description
+ * Dynamic dashboard for tracking cycle progress and managing daily medications.
+ * Features real-time updates, progress tracking, and detailed scheduling
+ * information with EST timezone support.
+ *
+ * Dashboard Features:
+ * - Real-time cycle progress tracking
+ * - Current phase identification
+ * - Daily medication schedule
+ * - Progress visualization
+ *
+ * Time Management:
+ * - EST timezone conversion
+ * - Automatic updates
+ * - Cycle day calculation
+ * - Phase transitions
+ *
+ * Medication Tracking:
+ * - Daily requirements
+ * - Injection schedules
+ * - Dosage information
+ * - Complete 18-week timeline
+ *
+ * Visual Elements:
+ * - Progress bars
+ * - Status cards
+ * - Interactive elements
+ * - Icon integration
+ *
+ * @example
+ * ```tsx
+ * import Today from './pages/Today';
+ *
+ * function App() {
+ *   return (
+ *     <Router>
+ *       <Route path="/today" element={<Today />} />
+ *     </Router>
+ *   );
+ * }
+ * ```
+ *
+ * @dependencies
+ * - react@18.3.1
+ * - react-router-dom@7.1.1
+ * - @heroicons/react@2.2.0
+ *
+ * @requirements
+ * - Tailwind CSS for styling
+ * - Modern browser features
+ * - EST timezone support
+ */
+
 import { useEffect, useState } from "react";
 import {
   CalendarDaysIcon,
@@ -105,13 +174,15 @@ export default function Today() {
   return (
     <div className="space-y-8">
       {/* Progress Bar */}
-      <div className="bg-white shadow-lg rounded-xl border border-gray-100 p-6">
+      <div className="p-6 bg-white border border-gray-100 shadow-lg dark:bg-gray-900 dark:border-gray-800 rounded-xl">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-3">
-            <PresentationChartLineIcon className="h-6 w-6 text-blue-500" />
-            <h2 className="text-xl font-bold text-gray-800">Cycle Progress</h2>
+            <PresentationChartLineIcon className="w-6 h-6 text-blue-500" />
+            <h2 className="text-xl font-bold text-gray-800 dark:text-white">
+              Cycle Progress
+            </h2>
           </div>
-          <div className="text-sm font-medium text-gray-500">
+          <div className="text-sm font-medium text-gray-500 dark:text-gray-400">
             {Math.max(
               0,
               Math.min(100, (cycleDay / TOTAL_CYCLE_DAYS) * 100)
@@ -119,9 +190,9 @@ export default function Today() {
             % Complete
           </div>
         </div>
-        <div className="w-full bg-gray-100 rounded-full h-4">
+        <div className="w-full h-4 bg-gray-100 rounded-full dark:bg-gray-800">
           <div
-            className="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full transition-all duration-500 ease-out"
+            className="h-full transition-all duration-500 ease-out rounded-full bg-gradient-to-r from-blue-500 to-blue-600 dark:from-blue-600 dark:to-blue-700"
             style={{
               width: `${Math.max(
                 0,
@@ -133,15 +204,15 @@ export default function Today() {
       </div>
 
       {/* Quick Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white shadow-lg rounded-xl border border-gray-100 p-6 transform transition-all duration-200 hover:scale-[1.02]">
-          <div className="flex items-center space-x-3 mb-2">
-            <BeakerIcon className="h-6 w-6 text-purple-500" />
-            <h3 className="text-lg font-semibold text-gray-800">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="bg-white dark:bg-gray-900 shadow-lg rounded-xl border border-gray-100 dark:border-gray-800 p-6 transform transition-all duration-200 hover:scale-[1.02]">
+          <div className="flex items-center mb-2 space-x-3">
+            <BeakerIcon className="w-6 h-6 text-purple-500" />
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
               Current Phase
             </h3>
           </div>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-300">
             {cycleDay <= 70
               ? "Main Cycle (Weeks 1-10)"
               : cycleDay <= 91
@@ -150,14 +221,14 @@ export default function Today() {
           </p>
         </div>
 
-        <div className="bg-white shadow-lg rounded-xl border border-gray-100 p-6 transform transition-all duration-200 hover:scale-[1.02]">
-          <div className="flex items-center space-x-3 mb-2">
-            <ArrowTrendingUpIcon className="h-6 w-6 text-green-500" />
-            <h3 className="text-lg font-semibold text-gray-800">
+        <div className="bg-white dark:bg-gray-900 shadow-lg rounded-xl border border-gray-100 dark:border-gray-800 p-6 transform transition-all duration-200 hover:scale-[1.02]">
+          <div className="flex items-center mb-2 space-x-3">
+            <ArrowTrendingUpIcon className="w-6 h-6 text-green-500" />
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
               Next Milestone
             </h3>
           </div>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-300">
             {cycleDay < 70
               ? `PCT Begins in ${71 - cycleDay} days`
               : cycleDay < 126
@@ -166,14 +237,14 @@ export default function Today() {
           </p>
         </div>
 
-        <div className="bg-white shadow-lg rounded-xl border border-gray-100 p-6 transform transition-all duration-200 hover:scale-[1.02]">
-          <div className="flex items-center space-x-3 mb-2">
-            <CircleStackIcon className="h-6 w-6 text-orange-500" />
-            <h3 className="text-lg font-semibold text-gray-800">
+        <div className="bg-white dark:bg-gray-900 shadow-lg rounded-xl border border-gray-100 dark:border-gray-800 p-6 transform transition-all duration-200 hover:scale-[1.02]">
+          <div className="flex items-center mb-2 space-x-3">
+            <CircleStackIcon className="w-6 h-6 text-orange-500" />
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
               Total Progress
             </h3>
           </div>
-          <p className="text-gray-600">
+          <p className="text-gray-600 dark:text-gray-300">
             {cycleDay < 1
               ? "Not Started"
               : cycleDay > TOTAL_CYCLE_DAYS
@@ -184,14 +255,14 @@ export default function Today() {
       </div>
 
       {/* Current Date Card */}
-      <div className="bg-white shadow-lg rounded-xl border border-gray-100 p-6 transform transition-all duration-200 hover:scale-[1.01]">
-        <div className="flex items-center space-x-3 mb-2">
-          <CalendarDaysIcon className="h-6 w-6 text-blue-500" />
-          <h2 className="text-xl font-bold text-gray-800 mt-0">
+      <div className="bg-white dark:bg-gray-900 shadow-lg rounded-xl border border-gray-100 dark:border-gray-800 p-6 transform transition-all duration-200 hover:scale-[1.01]">
+        <div className="flex items-center mb-2 space-x-3">
+          <CalendarDaysIcon className="w-6 h-6 text-blue-500" />
+          <h2 className="mt-0 text-xl font-bold text-gray-800 dark:text-white">
             Current Date (EST)
           </h2>
         </div>
-        <p className="text-sm text-gray-600 mb-0">
+        <p className="mb-0 text-sm text-gray-600 dark:text-gray-300">
           {estDateTime} <br />
           {cycleDay >= 1 && cycleDay <= TOTAL_CYCLE_DAYS ? (
             <>
@@ -207,26 +278,26 @@ export default function Today() {
       </div>
 
       {/* Today's Medications */}
-      <div className="bg-white shadow-lg rounded-xl border border-gray-100 p-6 transform transition-all duration-200 hover:scale-[1.01]">
-        <div className="flex items-center space-x-3 mb-2">
-          <CheckCircleIcon className="h-6 w-6 text-green-600" />
-          <h2 className="text-xl font-bold text-gray-800 mt-0">
+      <div className="bg-white dark:bg-gray-900 shadow-lg rounded-xl border border-gray-100 dark:border-gray-800 p-6 transform transition-all duration-200 hover:scale-[1.01]">
+        <div className="flex items-center mb-2 space-x-3">
+          <CheckCircleIcon className="w-6 h-6 text-green-600" />
+          <h2 className="mt-0 text-xl font-bold text-gray-800 dark:text-white">
             Medications/Instructions for Today
           </h2>
         </div>
-        <ul className="divide-y divide-gray-100">
+        <ul className="divide-y divide-gray-100 dark:divide-gray-800">
           {medsToday.map((med, idx) => (
             <li
               key={idx}
-              className="py-3 flex items-center space-x-3 hover:bg-gray-50 rounded-lg px-2 transition-colors duration-150"
+              className="flex items-center px-2 py-3 space-x-3 transition-colors duration-150 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800"
             >
               <span className="flex-shrink-0">
                 {med.includes("injection") ? (
-                  <BeakerIcon className="h-5 w-5 text-blue-500" />
+                  <BeakerIcon className="w-5 h-5 text-blue-500" />
                 ) : med.includes("pill") ? (
-                  <CircleStackIcon className="h-5 w-5 text-purple-500" />
+                  <CircleStackIcon className="w-5 h-5 text-purple-500" />
                 ) : (
-                  <CheckCircleIcon className="h-5 w-5 text-green-500" />
+                  <CheckCircleIcon className="w-5 h-5 text-green-500" />
                 )}
               </span>
               <span>{med}</span>
@@ -236,17 +307,17 @@ export default function Today() {
       </div>
 
       {/* Complete Schedule */}
-      <div className="bg-white shadow-lg rounded-xl border border-gray-100 p-6 transform transition-all duration-200 hover:scale-[1.01]">
-        <div className="flex items-center space-x-3 mb-2">
-          <ClockIcon className="h-6 w-6 text-indigo-600" />
-          <h2 className="text-xl font-bold text-gray-800 mt-0">
+      <div className="bg-white dark:bg-gray-900 shadow-lg rounded-xl border border-gray-100 dark:border-gray-800 p-6 transform transition-all duration-200 hover:scale-[1.01]">
+        <div className="flex items-center mb-2 space-x-3">
+          <ClockIcon className="w-6 h-6 text-indigo-600" />
+          <h2 className="mt-0 text-xl font-bold text-gray-800 dark:text-white">
             Complete 18-Week Schedule
           </h2>
         </div>
-        <div className="text-sm text-gray-600 whitespace-pre-line font-mono mt-4 space-y-6">
+        <div className="mt-4 space-y-6 font-mono text-sm text-gray-600 whitespace-pre-line dark:text-gray-300">
           {/* Weeks 1-10 */}
-          <h3 className="text-lg font-semibold mb-2 flex items-center space-x-2">
-            <BeakerIcon className="h-5 w-5 text-blue-500" />
+          <h3 className="flex items-center mb-2 space-x-2 text-lg font-semibold text-gray-900 dark:text-white">
+            <BeakerIcon className="w-5 h-5 text-blue-500" />
             WEEKS 1–10 (Days 1–70)
           </h3>
           <p>
@@ -258,8 +329,8 @@ export default function Today() {
           <p>Day 70 (Tue, Mar 18): Anastrozole 0.5 mg</p>
 
           {/* Weeks 11-13 */}
-          <h3 className="text-lg font-semibold mb-2 flex items-center space-x-2">
-            <CircleStackIcon className="h-5 w-5 text-purple-500" />
+          <h3 className="flex items-center mb-2 space-x-2 text-lg font-semibold text-gray-900 dark:text-white">
+            <CircleStackIcon className="w-5 h-5 text-purple-500" />
             WEEKS 11–13 (Days 71–91)
           </h3>
           <p>Day 71 (Wed, Mar 19): HCG 500 IU, Semaglutide</p>
@@ -267,8 +338,8 @@ export default function Today() {
           <p>Day 91 (Tue, Apr 8): (No meds)</p>
 
           {/* Weeks 14-18 */}
-          <h3 className="text-lg font-semibold mb-2 flex items-center space-x-2">
-            <CheckCircleIcon className="h-5 w-5 text-green-500" />
+          <h3 className="flex items-center mb-2 space-x-2 text-lg font-semibold text-gray-900 dark:text-white">
+            <CheckCircleIcon className="w-5 h-5 text-green-500" />
             WEEKS 14–18 (Days 92–126)
           </h3>
           <p>Day 92 (Wed, Apr 9): Nolvadex 20 mg, Clomid 50 mg, Semaglutide</p>

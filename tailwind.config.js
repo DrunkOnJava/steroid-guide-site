@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
@@ -32,6 +33,79 @@ export default {
             color: "rgb(55 65 81)",
             fontSize: "1.075rem",
             lineHeight: "1.75",
+          },
+        },
+        dark: {
+          css: {
+            color: "rgb(209 213 219)",
+            '[class~="lead"]': {
+              color: "rgb(209 213 219)",
+            },
+            a: {
+              color: "rgb(59 130 246)",
+              "&:hover": {
+                color: "rgb(96 165 250)",
+              },
+            },
+            strong: {
+              color: "rgb(255 255 255)",
+            },
+            "ol > li::marker": {
+              color: "rgb(156 163 175)",
+            },
+            "ul > li::marker": {
+              color: "rgb(156 163 175)",
+            },
+            hr: {
+              borderColor: "rgb(75 85 99)",
+            },
+            blockquote: {
+              color: "rgb(209 213 219)",
+              borderLeftColor: "rgb(75 85 99)",
+            },
+            h1: {
+              color: "rgb(255 255 255)",
+            },
+            h2: {
+              color: "rgb(255 255 255)",
+            },
+            h3: {
+              color: "rgb(255 255 255)",
+            },
+            h4: {
+              color: "rgb(255 255 255)",
+            },
+            "figure figcaption": {
+              color: "rgb(156 163 175)",
+            },
+            code: {
+              color: "rgb(255 255 255)",
+              backgroundColor: "rgb(31 41 55)",
+            },
+            "a code": {
+              color: "rgb(255 255 255)",
+            },
+            pre: {
+              color: "rgb(209 213 219)",
+              backgroundColor: "rgb(31 41 55)",
+            },
+            "pre code": {
+              color: "rgb(209 213 219)",
+              backgroundColor: "transparent",
+            },
+            "pre code::before": {
+              content: '""',
+            },
+            "pre code::after": {
+              content: '""',
+            },
+            thead: {
+              color: "rgb(255 255 255)",
+              borderBottomColor: "rgb(75 85 99)",
+            },
+            "tbody tr": {
+              borderBottomColor: "rgb(75 85 99)",
+            },
             p: {
               marginTop: "1.25em",
               marginBottom: "1.25em",

@@ -1,3 +1,87 @@
+/**
+ * @fileoverview Comprehensive medication schedule display component
+ * @project     Steroid Guide Site (v0.0.0)
+ * @module      MedicationSchedule
+ *
+ * @author      Steroid Guide Team <team@steroidguide.com>
+ * @contributors
+ * @maintainer  Steroid Guide Team <team@steroidguide.com>
+ *
+ * @created     2024-03-19
+ * @modified    2024-03-19
+ * @version     1.0.0
+ *
+ * @license     MIT - see LICENSE.md file in root directory
+ * @copyright   Copyright (c) 2024 Steroid Guide
+ *
+ * @description
+ * Advanced schedule component for displaying medication timing and dosages across multiple phases.
+ *
+ * Schedule Organization:
+ * - Three distinct phases: Main (10 weeks), Bridging (3 weeks), PCT (5 weeks)
+ * - Day-by-day breakdown with dates and weekdays
+ * - Color-coded phases for visual distinction
+ * - Medication grouping by administration time
+ *
+ * Scheduling Features:
+ * - Automatic date calculation from start date
+ * - Weekly pattern recognition (e.g., Sunday/Wednesday injections)
+ * - Empty day handling
+ * - Phase transition management
+ *
+ * Visual Elements:
+ * - Phase indicators with color coding
+ * - Card-based day display
+ * - Hover effects for better interaction
+ * - Responsive grid layout
+ *
+ * Data Management:
+ * - Dynamic schedule generation
+ * - Flexible medication arrays
+ * - Date formatting and manipulation
+ * - Phase-specific logic handling
+ *
+ * @example
+ * ```tsx
+ * import MedicationSchedule from './MedicationSchedule';
+ *
+ * function SchedulePage() {
+ *   return (
+ *     <div className="container mx-auto">
+ *       <h1>Cycle Schedule</h1>
+ *       <MedicationSchedule />
+ *     </div>
+ *   );
+ * }
+ *
+ * // Schedule Structure:
+ * // Phase 1 (Weeks 1-10):
+ * // - Test Cyp 250mg + NPP 100mg (Sun/Wed)
+ * // - Anastrozole 0.5mg (daily)
+ * // - Semaglutide (Wed)
+ * //
+ * // Phase 2 (Weeks 11-13):
+ * // - HCG 500 IU (Sun/Wed)
+ * // - Semaglutide (Wed)
+ * //
+ * // Phase 3 (Weeks 14-18):
+ * // - Nolvadex 20mg (daily)
+ * // - Clomid 50mg (daily)
+ * // - Semaglutide (Wed)
+ * ```
+ *
+ * @dependencies
+ * - react@18.3.1
+ * - TypeScript type definitions
+ *
+ * @requirements
+ * - Tailwind CSS for styling
+ * - Modern browser with CSS Grid support
+ * - JavaScript Date object support
+ * - Parent container with appropriate width
+ * - Proper date localization support
+ */
+
 import React from "react";
 
 interface DaySchedule {
@@ -10,7 +94,7 @@ const MedicationSchedule: React.FC = () => {
   // Helper function to render a phase section
   const renderPhase = (title: string, days: DaySchedule[], bgColor: string) => (
     <div className="mb-8">
-      <h3 className="text-xl font-semibold mb-4 px-4 py-2 bg-gray-100 rounded-lg">
+      <h3 className="px-4 py-2 mb-4 text-xl font-semibold bg-gray-100 rounded-lg dark:bg-gray-800 dark:text-white">
         {title}
       </h3>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -20,11 +104,11 @@ const MedicationSchedule: React.FC = () => {
             className={`${bgColor} rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-200`}
           >
             <div className="px-4 py-3 bg-opacity-75 border-b border-gray-200">
-              <div className="flex justify-between items-center">
-                <span className="font-semibold text-gray-800">
+              <div className="flex items-center justify-between">
+                <span className="font-semibold text-gray-800 dark:text-white">
                   Day {day.day}
                 </span>
-                <span className="text-sm font-medium text-gray-600">
+                <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
                   {day.date}
                 </span>
               </div>
@@ -33,13 +117,13 @@ const MedicationSchedule: React.FC = () => {
               {day.medications.map((med, index) => (
                 <div
                   key={index}
-                  className="text-sm text-gray-700 mb-2 last:mb-0 pl-4 border-l-2 border-gray-200"
+                  className="pl-4 mb-2 text-sm text-gray-700 border-l-2 border-gray-200 dark:text-gray-300 dark:border-gray-700 last:mb-0"
                 >
                   {med}
                 </div>
               ))}
               {day.medications.length === 0 && (
-                <div className="text-sm text-gray-500 italic pl-4 border-l-2 border-gray-200">
+                <div className="pl-4 text-sm italic text-gray-500 border-l-2 border-gray-200 dark:text-gray-400 dark:border-gray-700">
                   No medications scheduled
                 </div>
               )}
@@ -120,32 +204,48 @@ const MedicationSchedule: React.FC = () => {
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <div className="mb-8 bg-white p-6 rounded-xl shadow-sm">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800">
+    <div className="px-4 py-8 mx-auto max-w-7xl">
+      <div className="p-6 mb-8 bg-white shadow-sm dark:bg-gray-900 rounded-xl">
+        <h2 className="mb-4 text-2xl font-bold text-gray-800 dark:text-white">
           Cycle Schedule
         </h2>
         <div className="flex flex-wrap gap-6 mb-6">
           <div className="flex items-center">
-            <div className="w-4 h-4 rounded-full bg-blue-100 mr-2 ring-2 ring-blue-200"></div>
-            <span className="text-sm font-medium">Main Phase (Weeks 1-10)</span>
+            <div className="w-4 h-4 mr-2 bg-blue-100 rounded-full ring-2 ring-blue-200"></div>
+            <span className="text-sm font-medium dark:text-gray-300">
+              Main Phase (Weeks 1-10)
+            </span>
           </div>
           <div className="flex items-center">
-            <div className="w-4 h-4 rounded-full bg-green-100 mr-2 ring-2 ring-green-200"></div>
-            <span className="text-sm font-medium">
+            <div className="w-4 h-4 mr-2 bg-green-100 rounded-full ring-2 ring-green-200"></div>
+            <span className="text-sm font-medium dark:text-gray-300">
               Bridging Phase (Weeks 11-13)
             </span>
           </div>
           <div className="flex items-center">
-            <div className="w-4 h-4 rounded-full bg-purple-100 mr-2 ring-2 ring-purple-200"></div>
-            <span className="text-sm font-medium">PCT Phase (Weeks 14-18)</span>
+            <div className="w-4 h-4 mr-2 bg-purple-100 rounded-full ring-2 ring-purple-200"></div>
+            <span className="text-sm font-medium dark:text-gray-300">
+              PCT Phase (Weeks 14-18)
+            </span>
           </div>
         </div>
       </div>
 
-      {renderPhase("Weeks 1-10 (Days 1-70)", phase1Days, "bg-blue-50")}
-      {renderPhase("Weeks 11-13 (Days 71-91)", phase2Days, "bg-green-50")}
-      {renderPhase("Weeks 14-18 (Days 92-126)", phase3Days, "bg-purple-50")}
+      {renderPhase(
+        "Weeks 1-10 (Days 1-70)",
+        phase1Days,
+        "bg-blue-50 dark:bg-blue-950/50"
+      )}
+      {renderPhase(
+        "Weeks 11-13 (Days 71-91)",
+        phase2Days,
+        "bg-green-50 dark:bg-green-950/50"
+      )}
+      {renderPhase(
+        "Weeks 14-18 (Days 92-126)",
+        phase3Days,
+        "bg-purple-50 dark:bg-purple-950/50"
+      )}
     </div>
   );
 };

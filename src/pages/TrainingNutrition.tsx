@@ -1,3 +1,67 @@
+/**
+ * @fileoverview Phase-specific training and nutrition protocols page
+ * @project     Steroid Guide Site (v0.0.0)
+ * @module      TrainingNutrition
+ *
+ * @author      Steroid Guide Team <team@steroidguide.com>
+ * @contributors
+ * @maintainer  Steroid Guide Team <team@steroidguide.com>
+ *
+ * @created     2024-03-19
+ * @modified    2024-03-19
+ * @version     1.0.0
+ *
+ * @license     MIT - see LICENSE.md file in root directory
+ * @copyright   Copyright (c) 2024 Steroid Guide
+ *
+ * @description
+ * Comprehensive guide for training and nutrition protocols across different
+ * cycle phases. Features detailed workout plans, nutritional guidelines,
+ * and recovery strategies with phase-specific adjustments.
+ *
+ * Training Protocols:
+ * - Phase-specific workout splits
+ * - Exercise selection and progression
+ * - Volume and intensity guidelines
+ * - Recovery management
+ *
+ * Nutritional Guidelines:
+ * - Caloric requirements
+ * - Macronutrient ratios
+ * - Phase-specific adjustments
+ * - Supplement recommendations
+ *
+ * Recovery Strategies:
+ * - Sleep optimization
+ * - Stress management
+ * - Progress monitoring
+ * - Recovery markers
+ *
+ * @example
+ * ```tsx
+ * import TrainingNutrition from './pages/TrainingNutrition';
+ *
+ * function App() {
+ *   return (
+ *     <Router>
+ *       <Route path="/training-nutrition" element={<TrainingNutrition />} />
+ *     </Router>
+ *   );
+ * }
+ * ```
+ *
+ * @dependencies
+ * - react@18.3.1
+ * - react-router-dom@7.1.1
+ * - @headlessui/react@1.7.18
+ * - @heroicons/react@2.2.0
+ *
+ * @requirements
+ * - Tailwind CSS for styling
+ * - Modern browser features
+ * - Tab component support
+ */
+
 import { useState } from "react";
 import { Tab } from "@headlessui/react";
 import {
@@ -149,8 +213,8 @@ export default function TrainingNutrition() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <h1 className="text-4xl font-extrabold mb-8 text-gray-900">
+    <div className="px-4 py-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <h1 className="mb-8 text-4xl font-extrabold text-gray-900 dark:text-white">
         Training & Nutrition Guide
       </h1>
 
@@ -158,13 +222,13 @@ export default function TrainingNutrition() {
         selectedIndex={selectedPhase}
         onChange={(index) => setSelectedPhase(index)}
       >
-        <Tab.List className="flex space-x-4 bg-gray-100 p-2 rounded-lg mb-8">
+        <Tab.List className="flex p-2 mb-8 space-x-4 bg-gray-100 rounded-lg dark:bg-gray-800">
           <Tab
             className={({ selected }) =>
               `flex-1 py-3 px-4 rounded-lg font-medium focus:outline-none ${
                 selected
                   ? "bg-blue-500 text-white shadow-lg"
-                  : "text-gray-600 hover:bg-gray-200"
+                  : "text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
               }`
             }
           >
@@ -197,12 +261,12 @@ export default function TrainingNutrition() {
         <Tab.Panels>
           {phases.map((phase, idx) => (
             <Tab.Panel key={idx}>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
                 {/* Training Section */}
-                <div className="bg-white rounded-xl shadow-lg p-6">
+                <div className="p-6 bg-white shadow-lg dark:bg-gray-900 rounded-xl">
                   <div className="flex items-center mb-6">
-                    <ChartBarIcon className="h-6 w-6 text-blue-500 mr-2" />
-                    <h2 className="text-2xl font-bold text-gray-900">
+                    <ChartBarIcon className="w-6 h-6 mr-2 text-blue-500" />
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                       Training
                     </h2>
                   </div>
@@ -211,7 +275,7 @@ export default function TrainingNutrition() {
                     {phase.workoutDays.map((day) => (
                       <div
                         key={day.name}
-                        className="border rounded-lg overflow-hidden"
+                        className="overflow-hidden border rounded-lg"
                       >
                         <button
                           onClick={() =>
@@ -219,9 +283,9 @@ export default function TrainingNutrition() {
                               expandedDay === day.name ? null : day.name
                             )
                           }
-                          className="w-full px-4 py-3 bg-gray-50 flex justify-between items-center"
+                          className="flex items-center justify-between w-full px-4 py-3 bg-gray-50 dark:bg-gray-800"
                         >
-                          <span className="font-medium text-gray-900">
+                          <span className="font-medium text-gray-900 dark:text-white">
                             {day.name}
                           </span>
                           <ChartBarIcon
@@ -235,13 +299,13 @@ export default function TrainingNutrition() {
                             <table className="min-w-full divide-y divide-gray-200">
                               <thead>
                                 <tr>
-                                  <th className="px-4 py-2 text-left text-sm font-medium text-gray-500">
+                                  <th className="px-4 py-2 text-sm font-medium text-left text-gray-500 dark:text-gray-400">
                                     Exercise
                                   </th>
-                                  <th className="px-4 py-2 text-left text-sm font-medium text-gray-500">
+                                  <th className="px-4 py-2 text-sm font-medium text-left text-gray-500">
                                     Sets
                                   </th>
-                                  <th className="px-4 py-2 text-left text-sm font-medium text-gray-500">
+                                  <th className="px-4 py-2 text-sm font-medium text-left text-gray-500">
                                     Reps
                                   </th>
                                 </tr>
@@ -249,10 +313,10 @@ export default function TrainingNutrition() {
                               <tbody className="divide-y divide-gray-200">
                                 {day.exercises.map((exercise, i) => (
                                   <tr key={i}>
-                                    <td className="px-4 py-2 text-sm text-gray-900">
+                                    <td className="px-4 py-2 text-sm text-gray-900 dark:text-white">
                                       {exercise.name}
                                     </td>
-                                    <td className="px-4 py-2 text-sm text-gray-600">
+                                    <td className="px-4 py-2 text-sm text-gray-600 dark:text-gray-300">
                                       {exercise.sets}
                                     </td>
                                     <td className="px-4 py-2 text-sm text-gray-600">
@@ -270,37 +334,45 @@ export default function TrainingNutrition() {
                 </div>
 
                 {/* Nutrition Section */}
-                <div className="bg-white rounded-xl shadow-lg p-6">
+                <div className="p-6 bg-white shadow-lg dark:bg-gray-900 rounded-xl">
                   <div className="flex items-center mb-6">
-                    <BeakerIcon className="h-6 w-6 text-blue-500 mr-2" />
-                    <h2 className="text-2xl font-bold text-gray-900">
+                    <BeakerIcon className="w-6 h-6 mr-2 text-blue-500" />
+                    <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                       Nutrition
                     </h2>
                   </div>
 
                   <div className="space-y-6">
                     <div className="grid grid-cols-2 gap-4">
-                      <div className="bg-gray-50 p-4 rounded-lg">
-                        <p className="text-sm text-gray-500 mb-1">Calories</p>
-                        <p className="font-medium text-gray-900">
+                      <div className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
+                        <p className="mb-1 text-sm text-gray-500 dark:text-gray-400">
+                          Calories
+                        </p>
+                        <p className="font-medium text-gray-900 dark:text-white">
                           {phase.nutrition.calories}
                         </p>
                       </div>
-                      <div className="bg-gray-50 p-4 rounded-lg">
-                        <p className="text-sm text-gray-500 mb-1">Protein</p>
-                        <p className="font-medium text-gray-900">
+                      <div className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
+                        <p className="mb-1 text-sm text-gray-500 dark:text-gray-400">
+                          Protein
+                        </p>
+                        <p className="font-medium text-gray-900 dark:text-white">
                           {phase.nutrition.protein}
                         </p>
                       </div>
-                      <div className="bg-gray-50 p-4 rounded-lg">
-                        <p className="text-sm text-gray-500 mb-1">Carbs</p>
-                        <p className="font-medium text-gray-900">
+                      <div className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
+                        <p className="mb-1 text-sm text-gray-500 dark:text-gray-400">
+                          Carbs
+                        </p>
+                        <p className="font-medium text-gray-900 dark:text-white">
                           {phase.nutrition.carbs}
                         </p>
                       </div>
-                      <div className="bg-gray-50 p-4 rounded-lg">
-                        <p className="text-sm text-gray-500 mb-1">Fats</p>
-                        <p className="font-medium text-gray-900">
+                      <div className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
+                        <p className="mb-1 text-sm text-gray-500 dark:text-gray-400">
+                          Fats
+                        </p>
+                        <p className="font-medium text-gray-900 dark:text-white">
                           {phase.nutrition.fats}
                         </p>
                       </div>
@@ -314,16 +386,20 @@ export default function TrainingNutrition() {
       </Tab.Group>
 
       {/* Recovery Section */}
-      <div className="mt-8 bg-white rounded-xl shadow-lg p-6">
+      <div className="p-6 mt-8 bg-white shadow-lg dark:bg-gray-900 rounded-xl">
         <div className="flex items-center mb-6">
-          <HeartIcon className="h-6 w-6 text-blue-500 mr-2" />
-          <h2 className="text-2xl font-bold text-gray-900">Recovery</h2>
+          <HeartIcon className="w-6 h-6 mr-2 text-blue-500" />
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+            Recovery
+          </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="bg-gray-50 p-4 rounded-lg">
-            <h3 className="font-medium text-gray-900 mb-2">Sleep Protocol</h3>
-            <ul className="text-sm text-gray-600 space-y-2">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
+            <h3 className="mb-2 font-medium text-gray-900 dark:text-white">
+              Sleep Protocol
+            </h3>
+            <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
               <li>• 8-9 hours nightly minimum</li>
               <li>• Consistent sleep/wake schedule</li>
               <li>• Dark room, cool temperature</li>
@@ -331,11 +407,11 @@ export default function TrainingNutrition() {
             </ul>
           </div>
 
-          <div className="bg-gray-50 p-4 rounded-lg">
-            <h3 className="font-medium text-gray-900 mb-2">
+          <div className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
+            <h3 className="mb-2 font-medium text-gray-900 dark:text-white">
               Stress Management
             </h3>
-            <ul className="text-sm text-gray-600 space-y-2">
+            <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
               <li>• Daily meditation or relaxation</li>
               <li>• Regular massage or foam rolling</li>
               <li>• Contrast showers post-workout</li>
@@ -343,9 +419,11 @@ export default function TrainingNutrition() {
             </ul>
           </div>
 
-          <div className="bg-gray-50 p-4 rounded-lg">
-            <h3 className="font-medium text-gray-900 mb-2">Recovery Markers</h3>
-            <ul className="text-sm text-gray-600 space-y-2">
+          <div className="p-4 rounded-lg bg-gray-50 dark:bg-gray-800">
+            <h3 className="mb-2 font-medium text-gray-900 dark:text-white">
+              Recovery Markers
+            </h3>
+            <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
               <li>• Morning heart rate</li>
               <li>• Sleep quality</li>
               <li>• Training performance</li>

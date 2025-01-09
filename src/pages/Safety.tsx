@@ -1,3 +1,65 @@
+/**
+ * @fileoverview Safety guidelines and protocols page
+ * @project     Steroid Guide Site (v0.0.0)
+ * @module      Safety
+ *
+ * @author      Steroid Guide Team <team@steroidguide.com>
+ * @contributors
+ * @maintainer  Steroid Guide Team <team@steroidguide.com>
+ *
+ * @created     2024-03-19
+ * @modified    2024-03-19
+ * @version     1.0.0
+ *
+ * @license     MIT - see LICENSE.md file in root directory
+ * @copyright   Copyright (c) 2024 Steroid Guide
+ *
+ * @description
+ * Comprehensive safety information page covering essential protocols,
+ * emergency procedures, and preventive measures for steroid usage.
+ * Organized into clear sections with visual indicators for importance.
+ *
+ * Safety Categories:
+ * - Pre-cycle requirements and testing
+ * - Emergency protocols and warning signs
+ * - Required equipment and supplies
+ * - Preventive measures and monitoring
+ *
+ * Medical Information:
+ * - Blood work requirements
+ * - Health markers to monitor
+ * - Warning signs and symptoms
+ * - Emergency response protocols
+ *
+ * Equipment Guidelines:
+ * - Injection supplies
+ * - Safety equipment
+ * - Monitoring tools
+ * - Proper disposal methods
+ *
+ * @example
+ * ```tsx
+ * import Safety from './pages/Safety';
+ *
+ * function App() {
+ *   return (
+ *     <Router>
+ *       <Route path="/safety" element={<Safety />} />
+ *     </Router>
+ *   );
+ * }
+ * ```
+ *
+ * @dependencies
+ * - react@18.3.1
+ * - react-router-dom@7.1.1
+ *
+ * @requirements
+ * - Tailwind CSS for styling
+ * - SafetySection component
+ * - Modern browser features
+ */
+
 import SafetySection from "../components/SafetySection";
 
 export default function Safety() {
@@ -8,8 +70,10 @@ export default function Safety() {
       items: (
         <div className="space-y-4">
           <div>
-            <h4 className="font-semibold mb-2">Essential Blood Work</h4>
-            <ul className="list-disc pl-5 space-y-1">
+            <h4 className="mb-2 font-semibold dark:text-white">
+              Essential Blood Work
+            </h4>
+            <ul className="pl-5 space-y-1 list-disc dark:text-gray-300">
               <li>Total and Free Testosterone</li>
               <li>Estradiol (E2)</li>
               <li>Prolactin</li>
@@ -19,8 +83,10 @@ export default function Safety() {
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold mb-2">Health Markers</h4>
-            <ul className="list-disc pl-5 space-y-1">
+            <h4 className="mb-2 font-semibold dark:text-white">
+              Health Markers
+            </h4>
+            <ul className="pl-5 space-y-1 list-disc dark:text-gray-300">
               <li>Complete Blood Count (CBC)</li>
               <li>Comprehensive Metabolic Panel (CMP)</li>
               <li>Lipid Panel</li>
@@ -38,10 +104,10 @@ export default function Safety() {
       items: (
         <div className="space-y-4">
           <div>
-            <h4 className="font-semibold mb-2 text-red-600">
+            <h4 className="mb-2 font-semibold text-red-600 dark:text-red-400">
               Immediate Medical Attention Required
             </h4>
-            <ul className="list-disc pl-5 space-y-1 text-red-700">
+            <ul className="pl-5 space-y-1 text-red-700 list-disc dark:text-red-400">
               <li>Severe chest pain/pressure</li>
               <li>Difficulty breathing</li>
               <li>Extreme blood pressure ({">"}160/100)</li>
@@ -59,8 +125,10 @@ export default function Safety() {
       items: (
         <div className="space-y-4">
           <div>
-            <h4 className="font-semibold mb-2">Injection Supplies</h4>
-            <ul className="list-disc pl-5 space-y-1">
+            <h4 className="mb-2 font-semibold dark:text-white">
+              Injection Supplies
+            </h4>
+            <ul className="pl-5 space-y-1 list-disc dark:text-gray-300">
               <li>Proper gauge needles (23g-25g)</li>
               <li>Drawing needles (18g-20g)</li>
               <li>Sterile syringes</li>
@@ -77,8 +145,10 @@ export default function Safety() {
       items: (
         <div className="space-y-4">
           <div>
-            <h4 className="font-semibold mb-2">Daily Practice</h4>
-            <ul className="list-disc pl-5 space-y-1">
+            <h4 className="mb-2 font-semibold dark:text-white">
+              Daily Practice
+            </h4>
+            <ul className="pl-5 space-y-1 list-disc dark:text-gray-300">
               <li>30 min cardio minimum</li>
               <li>Blood pressure monitoring</li>
               <li>Heart rate tracking</li>
@@ -92,11 +162,11 @@ export default function Safety() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <h1 className="text-4xl font-bold mb-8 text-gray-900">
+    <div className="px-4 py-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <h1 className="mb-8 text-4xl font-bold text-gray-900 dark:text-white">
         Safety Considerations
       </h1>
-      <p className="text-lg text-gray-600 mb-8">
+      <p className="mb-8 text-lg text-gray-600 dark:text-gray-300">
         Safety should always be your top priority. Review and follow these
         guidelines carefully.
       </p>

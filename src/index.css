@@ -1,14 +1,48 @@
+/*
+ * @fileoverview Global styles and Tailwind CSS configuration
+ * @project     Steroid Guide Site (v0.0.0)
+ * @module      index
+ *
+ * @author      Steroid Guide Team <team@steroidguide.com>
+ * @contributors
+ * @maintainer  Steroid Guide Team <team@steroidguide.com>
+ *
+ * @created     2024-03-19
+ * @modified    2024-03-19
+ * @version     1.0.0
+ *
+ * @license     MIT - see LICENSE.md file in root directory
+ * @copyright   Copyright (c) 2024 Steroid Guide
+ *
+ * Style Categories:
+ * - Base styles (typography, colors, spacing)
+ * - Component styles (buttons, cards, inputs)
+ * - Navigation elements (links, sidebar)
+ * - Utility classes
+ *
+ * Features:
+ * - Tailwind CSS integration
+ * - Custom component classes
+ * - Responsive design
+ * - Interactive elements
+ *
+ * Layer Organization:
+ * - Base (@layer base): Core element styles
+ * - Components (@layer components): Reusable UI components
+ * - Utilities (@layer utilities): Utility classes
+ */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   html {
-    @apply bg-gray-50 scroll-smooth;
+    @apply transition-colors duration-200 bg-gray-50 dark:bg-gray-900 scroll-smooth;
   }
 
   body {
-    @apply antialiased text-gray-700 leading-relaxed;
+    @apply antialiased leading-relaxed text-gray-700 dark:text-gray-300;
   }
 
   h1,
@@ -17,60 +51,60 @@
   h4,
   h5,
   h6 {
-    @apply font-bold tracking-tight text-gray-900;
+    @apply font-bold tracking-tight text-gray-900 dark:text-white;
   }
 
   a {
-    @apply transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-sm;
+    @apply transition-colors duration-200 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900;
   }
 
   p {
-    @apply text-gray-600 leading-relaxed;
+    @apply leading-relaxed text-gray-600 dark:text-gray-400;
   }
 
   code {
-    @apply font-mono text-sm;
+    @apply px-1 font-mono text-sm text-gray-800 bg-gray-100 rounded dark:bg-gray-900 dark:text-gray-200;
   }
 }
 
 @layer components {
   .nav-link {
-    @apply px-4 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-all duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-600 hover:after:w-full after:transition-all after:duration-200;
+    @apply px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-600 dark:after:bg-blue-400 hover:after:w-full after:transition-all after:duration-200;
   }
 
   .nav-link-active {
-    @apply text-blue-600 after:w-full;
+    @apply text-blue-600 dark:text-blue-400 after:w-full;
   }
 
   .sidebar-link {
-    @apply block px-4 py-2.5 text-sm text-gray-600 hover:bg-blue-50/50 hover:text-blue-600 transition-all duration-200 rounded-sm;
+    @apply block px-4 py-2.5 text-sm text-gray-600 dark:text-gray-400 hover:bg-blue-50/50 dark:hover:bg-blue-900/50 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 rounded-sm;
   }
 
   .sidebar-link-active {
-    @apply bg-blue-50 text-blue-600 font-medium border-r-2 border-blue-600;
+    @apply font-medium text-blue-600 border-r-2 border-blue-600 bg-blue-50 dark:bg-gray-900/30 dark:text-blue-400 dark:border-blue-400;
   }
 
   .card {
-    @apply bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all duration-200 hover:border-blue-100;
+    @apply transition-all duration-200 bg-white border border-gray-200 shadow-sm dark:bg-gray-900 rounded-xl dark:border-gray-800 hover:shadow-md hover:border-blue-100 dark:hover:border-blue-900;
   }
 
   .btn {
-    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 inline-flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed;
+    @apply inline-flex items-center justify-center px-4 py-2 font-medium transition-all duration-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-900 disabled:opacity-60 disabled:cursor-not-allowed;
   }
 
   .btn-primary {
-    @apply bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500 shadow-sm hover:shadow active:bg-blue-800;
+    @apply text-white bg-blue-600 shadow-sm dark:bg-blue-500 hover:bg-blue-700 dark:hover:bg-blue-600 focus:ring-blue-500 hover:shadow active:bg-blue-800 dark:active:bg-blue-700;
   }
 
   .btn-secondary {
-    @apply bg-gray-100 text-gray-700 hover:bg-gray-200 focus:ring-gray-500 border border-gray-200 hover:border-gray-300 active:bg-gray-300;
+    @apply text-gray-700 bg-gray-100 border border-gray-200 dark:bg-gray-900 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-800 focus:ring-gray-500 dark:border-gray-800 hover:border-gray-300 dark:hover:border-gray-700 active:bg-gray-300 dark:active:bg-gray-700;
   }
 
   .input {
-    @apply block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm transition-colors duration-200;
+    @apply block w-full text-gray-900 transition-colors duration-200 bg-white border-gray-300 rounded-lg shadow-sm dark:border-gray-800 dark:bg-gray-900 dark:text-gray-100 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-blue-500 dark:focus:ring-blue-400 sm:text-sm;
   }
 
   .select {
-    @apply block w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm transition-colors duration-200;
+    @apply block w-full text-gray-900 transition-colors duration-200 bg-white border-gray-300 rounded-lg shadow-sm dark:border-gray-800 dark:bg-gray-900 dark:text-gray-100 focus:border-blue-500 dark:focus:border-blue-400 focus:ring-blue-500 dark:focus:ring-blue-400 sm:text-sm;
   }
 }

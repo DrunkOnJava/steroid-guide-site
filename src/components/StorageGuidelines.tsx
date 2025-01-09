@@ -1,3 +1,77 @@
+/**
+ * @fileoverview Component for displaying compound storage and handling guidelines
+ * @project     Steroid Guide Site (v0.0.0)
+ * @module      StorageGuidelines
+ *
+ * @author      Steroid Guide Team <team@steroidguide.com>
+ * @contributors
+ * @maintainer  Steroid Guide Team <team@steroidguide.com>
+ *
+ * @created     2024-03-19
+ * @modified    2024-03-19
+ * @version     1.0.0
+ *
+ * @license     MIT - see LICENSE.md file in root directory
+ * @copyright   Copyright (c) 2024 Steroid Guide
+ *
+ * @description
+ * A comprehensive component for displaying storage and handling guidelines for compounds.
+ * Features sections for general storage practices and injection safety tips with
+ * visual icons and clear formatting.
+ *
+ * Component Features:
+ * - Customizable guideline sections
+ * - Default guidelines provided
+ * - Icon integration for visual context
+ * - Responsive grid layout
+ *
+ * Content Organization:
+ * - Categorized sections (storage, injection tips)
+ * - Bullet-point guidelines
+ * - Clear visual hierarchy
+ * - Consistent spacing
+ *
+ * Visual Elements:
+ * - Custom SVG icons
+ * - Gradient text effects
+ * - Card-based layout
+ * - Color-coded elements
+ *
+ * @example
+ * ```tsx
+ * import StorageGuidelines from './StorageGuidelines';
+ *
+ * // Using default guidelines
+ * function SafetyPage() {
+ *   return <StorageGuidelines />;
+ * }
+ *
+ * // Using custom guidelines
+ * const customSections = [
+ *   {
+ *     title: "Temperature Control",
+ *     icon: <ThermometerIcon />,
+ *     items: [
+ *       { text: "Store between 15-25°C" },
+ *       { text: "Avoid direct sunlight" }
+ *     ]
+ *   }
+ * ];
+ *
+ * function CustomGuidelines() {
+ *   return <StorageGuidelines sections={customSections} />;
+ * }
+ * ```
+ *
+ * @dependencies
+ * - react@18.3.1
+ *
+ * @requirements
+ * - Tailwind CSS for styling
+ * - Parent container with appropriate width
+ * - SVG support for icons
+ */
+
 interface GuidelineItem {
   text: string;
 }
@@ -77,21 +151,24 @@ export default function StorageGuidelines({
   const displaySections = sections || defaultSections;
 
   return (
-    <div className="mt-16 bg-white rounded-xl shadow-lg border border-gray-100 p-8">
-      <h2 className="text-3xl font-bold text-gray-900 mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-800">
+    <div className="p-8 mt-16 bg-white border border-gray-100 shadow-lg dark:bg-gray-900 dark:border-gray-800 rounded-xl">
+      <h2 className="mb-6 text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800 dark:from-blue-400 dark:to-blue-600">
         Storage and Handling Guidelines
       </h2>
-      <div className="grid md:grid-cols-2 gap-12">
+      <div className="grid gap-12 md:grid-cols-2">
         {displaySections.map((section, index) => (
-          <div key={index} className="bg-gray-50 rounded-lg p-6">
-            <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
+          <div
+            key={index}
+            className="p-6 rounded-lg bg-gray-50 dark:bg-gray-900/50"
+          >
+            <h3 className="flex items-center mb-4 text-xl font-bold text-gray-900 dark:text-white">
               {section.icon}
               {section.title}
             </h3>
-            <ul className="space-y-3 text-gray-600">
+            <ul className="space-y-3 text-gray-600 dark:text-gray-300">
               {section.items.map((item, itemIndex) => (
                 <li key={itemIndex} className="flex items-start">
-                  <span className="text-blue-500 mr-2">•</span>
+                  <span className="mr-2 text-blue-500">•</span>
                   <span>{item.text}</span>
                 </li>
               ))}
