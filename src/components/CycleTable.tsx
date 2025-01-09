@@ -81,17 +81,6 @@
 
 import { useState } from "react";
 
-interface CycleData {
-  week: string;
-  compound: string;
-  frequency: string;
-  dosage: string;
-  purpose: string;
-  phase: "main" | "transition" | "pct";
-  type: "primary" | "secondary" | "support" | "pct";
-  tooltip?: string;
-}
-
 interface TooltipProps {
   content: string;
   children: React.ReactNode;
@@ -116,6 +105,30 @@ function Tooltip({ content, children }: TooltipProps) {
       )}
     </div>
   );
+}
+
+const phaseColors = {
+  main: "bg-blue-50 dark:bg-blue-950/30",
+  transition: "bg-yellow-50 dark:bg-yellow-950/30",
+  pct: "bg-green-50 dark:bg-green-950/30",
+};
+
+const typeColors = {
+  primary: "text-blue-800 dark:text-blue-300",
+  secondary: "text-purple-800 dark:text-purple-300",
+  support: "text-gray-800 dark:text-gray-300",
+  pct: "text-green-800 dark:text-green-300",
+};
+
+interface CycleData {
+  week: string;
+  compound: string;
+  frequency: string;
+  dosage: string;
+  purpose: string;
+  phase: "main" | "transition" | "pct";
+  type: "primary" | "secondary" | "support" | "pct";
+  tooltip?: string;
 }
 
 const cycleData: CycleData[] = [
@@ -213,19 +226,6 @@ const cycleData: CycleData[] = [
       "GLP-1 receptor agonist - Helps with metabolic health and weight management",
   },
 ];
-
-const phaseColors = {
-  main: "bg-blue-50 dark:bg-blue-950/30",
-  transition: "bg-yellow-50 dark:bg-yellow-950/30",
-  pct: "bg-green-50 dark:bg-green-950/30",
-};
-
-const typeColors = {
-  primary: "text-blue-800 dark:text-blue-300",
-  secondary: "text-purple-800 dark:text-purple-300",
-  support: "text-gray-800 dark:text-gray-300",
-  pct: "text-green-800 dark:text-green-300",
-};
 
 export default function CycleTable() {
   return (

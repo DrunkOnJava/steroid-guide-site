@@ -77,7 +77,6 @@
 
 import { forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
 interface SelectOption {
   value: string;
@@ -117,7 +116,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         {label && (
           <label
             htmlFor={selectId}
-            className="text-sm font-medium text-gray-700"
+            className="text-sm font-medium text-gray-700 dark:text-gray-300"
           >
             {label}
           </label>
@@ -127,10 +126,12 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
             ref={ref}
             id={selectId}
             className={twMerge(
-              "block w-full rounded-lg border bg-white px-4 py-2 text-base text-gray-900 appearance-none",
-              "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
-              "disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500",
-              error ? "border-red-300 focus:ring-red-500" : "border-gray-300",
+              "block w-full rounded-lg border bg-white px-4 py-2 text-base text-gray-900 dark:bg-gray-900 dark:text-gray-100",
+              "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:focus:ring-blue-400",
+              "disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 dark:disabled:bg-gray-800 dark:disabled:text-gray-600",
+              error
+                ? "border-red-300 focus:ring-red-500 dark:border-red-700 dark:focus:ring-red-400"
+                : "border-gray-300 dark:border-gray-700",
               fullWidth && "w-full",
               className
             )}
@@ -159,13 +160,10 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
               </option>
             ))}
           </select>
-          <div className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 pointer-events-none">
-            <ChevronDownIcon className="w-5 h-5" aria-hidden="true" />
-          </div>
         </div>
         {error && (
           <p
-            className="text-sm text-red-600"
+            className="text-sm text-red-600 dark:text-red-400"
             id={`${selectId}-error`}
             role="alert"
           >
@@ -173,7 +171,10 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
           </p>
         )}
         {!error && helperText && (
-          <p className="text-sm text-gray-500" id={`${selectId}-description`}>
+          <p
+            className="text-sm text-gray-500 dark:text-gray-400"
+            id={`${selectId}-description`}
+          >
             {helperText}
           </p>
         )}

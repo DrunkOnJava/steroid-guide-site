@@ -35,3 +35,13 @@ yarn-error.log*
 
 # TypeScript
 *.tsbuildinfo
+
+# VS Code profiles
+*.cpuprofile
+*.heapprofile
+
+# Netlify
+.netlify/
+
+# Generated files
+lines-of-code.md

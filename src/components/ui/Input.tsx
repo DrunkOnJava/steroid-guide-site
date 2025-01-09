@@ -98,14 +98,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label
             htmlFor={inputId}
-            className="text-sm font-medium text-gray-700"
+            className="text-sm font-medium text-gray-700 dark:text-gray-300"
           >
             {label}
           </label>
         )}
         <div className="relative">
           {leftIcon && (
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 pointer-events-none">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 pointer-events-none dark:text-gray-500">
               {leftIcon}
             </div>
           )}
@@ -113,10 +113,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             id={inputId}
             className={twMerge(
-              "block rounded-lg border bg-white px-4 py-2 text-base text-gray-900 placeholder:text-gray-500",
-              "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
-              "disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500",
-              error ? "border-red-300 focus:ring-red-500" : "border-gray-300",
+              "block rounded-lg border bg-white px-4 py-2 text-base text-gray-900 dark:bg-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400",
+              "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:focus:ring-blue-400",
+              "disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 dark:disabled:bg-gray-800 dark:disabled:text-gray-600",
+              error
+                ? "border-red-300 focus:ring-red-500 dark:border-red-700 dark:focus:ring-red-400"
+                : "border-gray-300 dark:border-gray-700",
               leftIcon && "pl-10",
               rightIcon && "pr-10",
               fullWidth && "w-full",
@@ -133,14 +135,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             {...props}
           />
           {rightIcon && (
-            <div className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 pointer-events-none">
+            <div className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 pointer-events-none dark:text-gray-500">
               {rightIcon}
             </div>
           )}
         </div>
         {error && (
           <p
-            className="text-sm text-red-600"
+            className="text-sm text-red-600 dark:text-red-400"
             id={`${inputId}-error`}
             role="alert"
           >
@@ -148,7 +150,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           </p>
         )}
         {!error && helperText && (
-          <p className="text-sm text-gray-500" id={`${inputId}-description`}>
+          <p
+            className="text-sm text-gray-500 dark:text-gray-400"
+            id={`${inputId}-description`}
+          >
             {helperText}
           </p>
         )}

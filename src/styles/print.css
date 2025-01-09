@@ -1,0 +1,161 @@
+/* Print-specific styles */
+@media print {
+  /* Hide non-printable elements */
+  .no-print {
+    display: none !important;
+  }
+
+  /* Reset background colors and ensure dark text */
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Ensure tables break properly across pages */
+  table {
+    page-break-inside: auto !important;
+  }
+
+  tr {
+    page-break-inside: avoid !important;
+    page-break-after: auto !important;
+  }
+
+  /* Ensure proper margins and sizing */
+  @page {
+    margin: 2cm;
+    size: auto;
+  }
+
+  /* Enhance readability for printed content */
+  .print-content {
+    font-size: 12pt !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Show URLs after links */
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+    font-size: 90%;
+  }
+
+  /* Ensure dark mode content is visible when printed */
+  .dark {
+    color: black !important;
+    background: white !important;
+  }
+
+  /* Print-specific layout adjustments */
+  .print-layout {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Medication schedule print styles */
+  .print-schedule {
+    padding: 0 !important;
+  }
+
+  .print-schedule h2 {
+    font-size: 24pt !important;
+    margin-bottom: 1cm !important;
+    text-align: center !important;
+  }
+
+  .print-schedule h3 {
+    font-size: 18pt !important;
+    margin-top: 1cm !important;
+    border-bottom: 2px solid #000 !important;
+    padding-bottom: 0.5cm !important;
+  }
+
+  .print-schedule .grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.5cm !important;
+    page-break-inside: avoid !important;
+  }
+
+  .print-schedule .grid > div {
+    break-inside: avoid !important;
+    border: 1px solid #000 !important;
+    padding: 0.25cm !important;
+    margin-bottom: 0.5cm !important;
+    background: white !important;
+  }
+
+  .print-schedule .grid > div > div:first-child {
+    border-bottom: 1px solid #000 !important;
+    margin-bottom: 0.25cm !important;
+    padding-bottom: 0.25cm !important;
+  }
+
+  .print-schedule .grid > div > div:last-child {
+    font-size: 10pt !important;
+  }
+
+  .print-schedule .grid > div > div:last-child > div {
+    margin-bottom: 0.15cm !important;
+    padding-left: 0.25cm !important;
+    border-left: 2px solid #666 !important;
+  }
+
+  /* Ensure schedule tables are readable */
+  .schedule-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+
+  .schedule-table th,
+  .schedule-table td {
+    border: 1px solid #000 !important;
+    padding: 8px !important;
+    text-align: left !important;
+  }
+
+  /* Add page breaks before major sections */
+  .print-page-break {
+    page-break-before: always !important;
+  }
+
+  /* Ensure images print properly */
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Print-specific typography */
+  h1,
+  h2,
+  h3 {
+    page-break-after: avoid !important;
+  }
+
+  /* QR code display for digital version link */
+  .print-qr {
+    display: block !important;
+    margin: 2cm auto !important;
+    width: 150px !important;
+    height: 150px !important;
+  }
+}
+
+/* Styles for print preview mode */
+.print-mode {
+  background: white !important;
+  color: black !important;
+  padding: 2cm !important;
+  max-width: 210mm !important; /* A4 width */
+  margin: 0 auto !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+.print-mode .no-print {
+  display: none !important;
+}
+
+.print-mode .print-content {
+  font-size: 12pt !important;
+  line-height: 1.5 !important;
+}
