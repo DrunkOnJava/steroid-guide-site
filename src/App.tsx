@@ -50,7 +50,7 @@
  * - Content markdown files in /public/content/
  */
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { DarkModeProvider } from "./contexts/DarkModeContext";
 import { UserPreferencesProvider } from "./contexts/UserPreferencesContext";
 import { ProfileProvider } from "./contexts/ProfileContext";
@@ -112,32 +112,30 @@ export default function App() {
     <DarkModeProvider>
       <UserPreferencesProvider>
         <ProfileProvider>
-          <Router>
-            <Layout>
-              <Suspense fallback={<LoadingFallback />}>
-                <Routes>
-                  <Route path="/" element={<Today />} />
-                  <Route
-                    path="/introduction"
-                    element={
-                      <MarkdownPage filePath="/content/01_introduction.md" />
-                    }
-                  />
-                  <Route path="/cycle-overview" element={<CycleOverview />} />
-                  <Route path="/compounds" element={<Compounds />} />
-                  <Route
-                    path="/training-nutrition"
-                    element={<TrainingNutrition />}
-                  />
-                  <Route path="/glossary" element={<Glossary />} />
-                  <Route path="/safety" element={<Safety />} />
-                  <Route path="/schedule" element={<Schedule />} />
-                  <Route path="/components" element={<ComponentDemo />} />
-                  <Route path="/faq" element={<FAQ />} />
-                </Routes>
-              </Suspense>
-            </Layout>
-          </Router>
+          <Layout>
+            <Suspense fallback={<LoadingFallback />}>
+              <Routes>
+                <Route path="/" element={<Today />} />
+                <Route
+                  path="/introduction"
+                  element={
+                    <MarkdownPage filePath="/content/01_introduction.md" />
+                  }
+                />
+                <Route path="/cycle-overview" element={<CycleOverview />} />
+                <Route path="/compounds" element={<Compounds />} />
+                <Route
+                  path="/training-nutrition"
+                  element={<TrainingNutrition />}
+                />
+                <Route path="/glossary" element={<Glossary />} />
+                <Route path="/safety" element={<Safety />} />
+                <Route path="/schedule" element={<Schedule />} />
+                <Route path="/components" element={<ComponentDemo />} />
+                <Route path="/faq" element={<FAQ />} />
+              </Routes>
+            </Suspense>
+          </Layout>
         </ProfileProvider>
       </UserPreferencesProvider>
     </DarkModeProvider>
