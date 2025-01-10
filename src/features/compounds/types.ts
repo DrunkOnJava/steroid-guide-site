@@ -1,4 +1,4 @@
-export interface CompoundBenefit {
+[object Promise]export interface CompoundBenefit {
   text: string;
 }
 

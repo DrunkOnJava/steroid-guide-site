@@ -1,4 +1,4 @@
-export const compoundsFaqs = [
+[object Promise]export const compoundsFaqs = [
   {
     question: "How does testosterone cypionate differ from enanthate?",
     answer:

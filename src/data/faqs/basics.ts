@@ -1,4 +1,4 @@
-export const basicsFaqs = [
+[object Promise]export const basicsFaqs = [
   {
     question: "What is the best beginner steroid cycle?",
     answer:

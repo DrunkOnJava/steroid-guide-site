@@ -1,4 +1,4 @@
-export const trainingFaqs = [
+[object Promise]export const trainingFaqs = [
   {
     question: "How important is training intensity during a steroid cycle?",
     answer:

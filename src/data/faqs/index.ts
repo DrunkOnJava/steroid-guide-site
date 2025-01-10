@@ -1,4 +1,4 @@
-import { basicsFaqs } from "./basics";
+[object Promise]import { basicsFaqs } from "./basics";
 import { healthFaqs } from "./health";
 import { compoundsFaqs } from "./compounds";
 import { pctFaqs } from "./pct";

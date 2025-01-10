@@ -1,4 +1,4 @@
-export const healthFaqs = [
+[object Promise]export const healthFaqs = [
   {
     question: "What are the common side effects of steroids?",
     answer:

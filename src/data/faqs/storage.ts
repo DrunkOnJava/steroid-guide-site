@@ -1,4 +1,4 @@
-export const storageFaqs = [
+[object Promise]export const storageFaqs = [
   {
     question: "How do I properly store anabolic steroids?",
     answer:

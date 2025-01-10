@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+[object Promise]import { createContext, useContext } from "react";
 import { UserPreferencesContextType } from "./types";
 
 export const UserPreferencesContext = createContext<

@@ -1,4 +1,4 @@
-import {
+[object Promise]import {
   SunIcon,
   MoonIcon,
   ComputerDesktopIcon,

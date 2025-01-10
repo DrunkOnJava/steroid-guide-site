@@ -1,4 +1,4 @@
-export const safetyFaqs = [
+[object Promise]export const safetyFaqs = [
   {
     question: "How should I inject steroids to avoid complications?",
     answer:

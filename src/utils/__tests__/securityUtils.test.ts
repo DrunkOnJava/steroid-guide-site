@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+[object Promise]import { describe, it, expect, vi, beforeEach } from "vitest";
 import {
   sanitizeInput,
   sanitizeObject,
