@@ -1,0 +1,42 @@
+.faqItem {
+  transition: all 0.2s ease-in-out;
+}
+
+.faqContent {
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.searchInput {
+  transition: all 0.2s ease;
+}
+
+.searchInput:focus {
+  transform: translateY(-1px);
+}
+
+.categoryBadge {
+  transition: all 0.2s ease;
+}
+
+.categoryBadge:hover {
+  transform: translateY(-1px);
+}
+
+.copyButton {
+  transition: all 0.15s ease;
+}
+
+.copyButton:active {
+  transform: scale(0.95);
+}

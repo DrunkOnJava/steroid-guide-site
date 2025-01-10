@@ -64,104 +64,9 @@
  */
 
 import GlossarySection from "../components/GlossarySection";
+import { glossaryTerms } from "../data/glossaryTerms";
 
 export default function Glossary() {
-  const glossaryTerms = [
-    {
-      term: "Test Cyp",
-      definition:
-        "Testosterone Cypionate - long-acting injectable testosterone ester used as the primary anabolic compound",
-      category: "Compounds",
-    },
-    {
-      term: "NPP",
-      definition:
-        "Nandrolone Phenylpropionate - short-acting nandrolone ester for enhanced recovery and mass gains",
-      category: "Compounds",
-    },
-    {
-      term: "HCG",
-      definition:
-        "Human Chorionic Gonadotropin - peptide hormone that maintains testicular function during cycle",
-      category: "Compounds",
-    },
-    {
-      term: "Anabolic",
-      definition:
-        "Relating to the building of muscle tissue and growth processes",
-      category: "Basic Terms",
-    },
-    {
-      term: "Androgenic",
-      definition: "Relating to the development of male sex characteristics",
-      category: "Basic Terms",
-    },
-    {
-      term: "AAS",
-      definition:
-        "Anabolic-Androgenic Steroids - compounds that promote muscle growth and androgenic effects",
-      category: "Basic Terms",
-    },
-    {
-      term: "PCT",
-      definition:
-        "Post-Cycle Therapy - protocol used to restore natural hormone production after cycle",
-      category: "Cycle Terms",
-    },
-    {
-      term: "AI",
-      definition:
-        "Aromatase Inhibitor - medication that prevents conversion of testosterone to estrogen",
-      category: "Cycle Terms",
-    },
-    {
-      term: "LH",
-      definition:
-        "Luteinizing Hormone - pituitary hormone that stimulates testosterone production",
-      category: "Hormone Terms",
-    },
-    {
-      term: "FSH",
-      definition:
-        "Follicle Stimulating Hormone - pituitary hormone important for sperm production",
-      category: "Hormone Terms",
-    },
-    {
-      term: "Gyno",
-      definition:
-        "Development of breast tissue in males due to elevated estrogen",
-      category: "Side Effects",
-    },
-    {
-      term: "MPB",
-      definition: "Male Pattern Baldness accelerated by DHT-derived compounds",
-      category: "Side Effects",
-    },
-    {
-      term: "Hypertrophy",
-      definition:
-        "The increase in muscle size through training and enhanced protein synthesis",
-      category: "Training Terms",
-    },
-    {
-      term: "TDEE",
-      definition:
-        "Total Daily Energy Expenditure - total calories burned in a day",
-      category: "Training Terms",
-    },
-    {
-      term: "BP",
-      definition:
-        "Blood Pressure - vital sign that needs regular monitoring during cycle",
-      category: "Health Markers",
-    },
-    {
-      term: "HCT",
-      definition: "Hematocrit - percentage of red blood cells in blood",
-      category: "Health Markers",
-    },
-  ];
-
   return (
     <div className="px-4 py-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <h1 className="mb-8 text-4xl font-bold text-gray-900 dark:text-white">
@@ -169,8 +74,67 @@ export default function Glossary() {
       </h1>
       <p className="mb-8 text-lg text-gray-600 dark:text-gray-300">
         A comprehensive guide to commonly used terms and abbreviations in the
-        field.
+        field. Each term includes detailed explanations and related concepts to
+        help build a complete understanding.
       </p>
+      <div className="grid gap-4 mb-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+            Compounds
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300">
+            Steroids, peptides, and ancillary medications used in cycles.
+          </p>
+        </div>
+        <div className="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+            Basic Terms
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300">
+            Fundamental concepts and general terminology in the field.
+          </p>
+        </div>
+        <div className="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+            Cycle Terms
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300">
+            Protocol-related terminology and cycle management concepts.
+          </p>
+        </div>
+        <div className="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+            Hormone Terms
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300">
+            Endocrine system and hormone-related terminology.
+          </p>
+        </div>
+        <div className="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+            Side Effects
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300">
+            Common side effects and related medical terminology.
+          </p>
+        </div>
+        <div className="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+            Training Terms
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300">
+            Exercise and training-related terminology.
+          </p>
+        </div>
+        <div className="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+            Health Markers
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300">
+            Important health monitoring metrics and measurements.
+          </p>
+        </div>
+      </div>
       <GlossarySection terms={glossaryTerms} />
     </div>
   );

@@ -68,6 +68,7 @@ const Glossary = lazy(() => import("./pages/Glossary"));
 const Compounds = lazy(() => import("./pages/Compounds"));
 const Schedule = lazy(() => import("./pages/Schedule"));
 const ComponentDemo = lazy(() => import("./pages/ComponentDemo"));
+const UIDemo = lazy(() => import("./pages/UIDemo"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 
 // Loading fallback component
@@ -132,6 +133,7 @@ export default function App() {
                 <Route path="/safety" element={<Safety />} />
                 <Route path="/schedule" element={<Schedule />} />
                 <Route path="/components" element={<ComponentDemo />} />
+                <Route path="/ui" element={<UIDemo />} />
                 <Route path="/faq" element={<FAQ />} />
               </Routes>
             </Suspense>
