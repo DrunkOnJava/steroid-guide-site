@@ -1,129 +1,11 @@
 /**
- * @fileoverview Context provider for managing user profiles, cycles, and schedules
+ * @fileoverview React context provider for managing user profiles
  */
 
-import { createContext, useContext, useEffect, useState } from "react";
-interface Cycle {
-  id: string;
-  name: string;
-  startDate: string;
-  endDate: string;
-  compounds: Array<{
-    name: string;
-    dosage: number;
-    frequency: string;
-    unit: string;
-  }>;
-  notes?: string;
-}
-
-interface Schedule {
-  id: string;
-  cycleId: string;
-  date: string;
-  completed: boolean;
-  medications: Array<{
-    name: string;
-    dosage: number;
-    unit: string;
-    timeOfDay: string;
-    taken: boolean;
-  }>;
-}
-
-interface Profile {
-  id: string;
-  name: string;
-  cycles: Cycle[];
-  schedules: Schedule[];
-  lastBackup?: string;
-}
-
-interface ProfileContextType {
-  profiles: Profile[];
-  activeProfile: Profile | null;
-  setActiveProfile: (profileId: string) => void;
-  addProfile: (name: string) => void;
-  updateProfile: (profileId: string, updates: Partial<Profile>) => void;
-  deleteProfile: (profileId: string) => void;
-  exportData: (profileId?: string) => void;
-  importData: (jsonData: string) => void;
-  backupData: () => Promise<void>;
-  restoreBackup: () => Promise<void>;
-}
-
-const ProfileContext = createContext<ProfileContextType | null>(null);
-
-const STORAGE_KEY = "steroidGuideProfiles";
-const BACKUP_KEY = "steroidGuideBackup";
-
-// Encryption helper using Web Crypto API
-const encryptData = async (data: string): Promise<string> => {
-  const encoder = new TextEncoder();
-  const dataBuffer = encoder.encode(data);
-
-  // Generate a random key
-  const key = await window.crypto.subtle.generateKey(
-    { name: "AES-GCM", length: 256 },
-    true,
-    ["encrypt"]
-  );
-
-  // Generate a random IV
-  const iv = window.crypto.getRandomValues(new Uint8Array(12));
-
-  // Encrypt the data
-  const encryptedData = await window.crypto.subtle.encrypt(
-    { name: "AES-GCM", iv },
-    key,
-    dataBuffer
-  );
-
-  // Export the key
-  const exportedKey = await window.crypto.subtle.exportKey("raw", key);
-
-  // Combine IV, key, and encrypted data
-  const combined = new Uint8Array(
-    iv.length + exportedKey.byteLength + encryptedData.byteLength
-  );
-  combined.set(iv);
-  combined.set(new Uint8Array(exportedKey), iv.length);
-  combined.set(
-    new Uint8Array(encryptedData),
-    iv.length + exportedKey.byteLength
-  );
-
-  return btoa(String.fromCharCode(...combined));
-};
-
-// Decryption helper
-const decryptData = async (encryptedString: string): Promise<string> => {
-  const combined = new Uint8Array(
-    atob(encryptedString)
-      .split("")
-      .map((c) => c.charCodeAt(0))
-  );
-
-  const iv = combined.slice(0, 12);
-  const keyData = combined.slice(12, 44);
-  const encryptedData = combined.slice(44);
-
-  const key = await window.crypto.subtle.importKey(
-    "raw",
-    keyData,
-    { name: "AES-GCM", length: 256 },
-    true,
-    ["decrypt"]
-  );
-
-  const decryptedData = await window.crypto.subtle.decrypt(
-    { name: "AES-GCM", iv },
-    key,
-    encryptedData
-  );
-
-  return new TextDecoder().decode(decryptedData);
-};
+import { useEffect, useState } from "react";
+import { Profile, STORAGE_KEY, BACKUP_KEY } from "./profile.types";
+import { encryptData, decryptData } from "./profile.utils";
+import { ProfileContext } from "./profile.context";
 
 export function ProfileProvider({ children }: { children: React.ReactNode }) {
   const [profiles, setProfiles] = useState<Profile[]>(() => {
@@ -143,24 +25,63 @@ export function ProfileProvider({ children }: { children: React.ReactNode }) {
   };
 
   const addProfile = (name: string) => {
+    if (!name || name.trim().length === 0) {
+      throw new Error("Profile name is required");
+    }
+    if (name.length > 50) {
+      throw new Error("Profile name must be less than 50 characters");
+    }
+    if (profiles.some((p) => p.name === name)) {
+      throw new Error("Profile name must be unique");
+    }
+
+    const timestamp = new Date().toISOString();
     const newProfile: Profile = {
       id: crypto.randomUUID(),
-      name,
+      name: name.trim(),
       cycles: [],
       schedules: [],
+      createdAt: timestamp,
+      updatedAt: timestamp,
     };
     setProfiles((prev) => [...prev, newProfile]);
   };
 
   const updateProfile = (profileId: string, updates: Partial<Profile>) => {
+    if (!profileId) {
+      throw new Error("Profile ID is required");
+    }
+    if (!profiles.some((p) => p.id === profileId)) {
+      throw new Error("Profile not found");
+    }
+    if (updates.name) {
+      if (updates.name.trim().length === 0) {
+        throw new Error("Profile name cannot be empty");
+      }
+      if (updates.name.length > 50) {
+        throw new Error("Profile name must be less than 50 characters");
+      }
+      if (profiles.some((p) => p.id !== profileId && p.name === updates.name)) {
+        throw new Error("Profile name must be unique");
+      }
+    }
+    const timestamp = new Date().toISOString();
     setProfiles((prev) =>
       prev.map((profile) =>
-        profile.id === profileId ? { ...profile, ...updates } : profile
+        profile.id === profileId
+          ? { ...profile, ...updates, updatedAt: timestamp }
+          : profile
       )
     );
   };
 
   const deleteProfile = (profileId: string) => {
+    if (!profileId) {
+      throw new Error("Profile ID is required");
+    }
+    if (!profiles.some((p) => p.id === profileId)) {
+      throw new Error("Profile not found");
+    }
     setProfiles((prev) => prev.filter((profile) => profile.id !== profileId));
     if (activeProfile?.id === profileId) {
       setActiveProfileState(null);
@@ -185,16 +106,40 @@ export function ProfileProvider({ children }: { children: React.ReactNode }) {
   };
 
   const importData = (jsonData: string) => {
+    if (!jsonData || jsonData.trim().length === 0) {
+      throw new Error("Import data is required");
+    }
+
     try {
       const imported = JSON.parse(jsonData);
+
+      // Validate imported data structure
+      const validateProfile = (profile: unknown): profile is Profile => {
+        return (
+          typeof profile === "object" &&
+          profile !== null &&
+          typeof (profile as Profile).id === "string" &&
+          typeof (profile as Profile).name === "string" &&
+          Array.isArray((profile as Profile).cycles) &&
+          Array.isArray((profile as Profile).schedules)
+        );
+      };
+
       if (Array.isArray(imported)) {
+        if (!imported.every(validateProfile)) {
+          throw new Error("Invalid profile data structure");
+        }
         setProfiles(imported);
-      } else if (typeof imported === "object") {
+      } else if (validateProfile(imported)) {
         setProfiles((prev) => [...prev, imported]);
+      } else {
+        throw new Error("Invalid data format");
       }
     } catch (error) {
       console.error("Failed to import data:", error);
-      throw new Error("Invalid data format");
+      throw new Error(
+        error instanceof Error ? error.message : "Invalid data format"
+      );
     }
   };
 
@@ -244,12 +189,4 @@ export function ProfileProvider({ children }: { children: React.ReactNode }) {
       {children}
     </ProfileContext.Provider>
   );
-}
-
-export function useProfile() {
-  const context = useContext(ProfileContext);
-  if (!context) {
-    throw new Error("useProfile must be used within a ProfileProvider");
-  }
-  return context;
 }

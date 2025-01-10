@@ -1,11 +1,10 @@
 /**
- * @fileoverview Utility functions and components for medication handling
+ * @fileoverview Component for displaying medication tooltips
  */
 
 import { ReactNode } from "react";
-import { Tooltip } from "../components/ui";
-
-interface MedicationTooltipProps {
+import { Tooltip } from "./index";
+export interface MedicationTooltipProps {
   med: string;
 }
 
@@ -13,14 +12,14 @@ interface MedicationTooltipProps {
  * Component that wraps medication text with appropriate tooltips based on content
  */
 export function MedicationTooltip({ med }: MedicationTooltipProps): ReactNode {
-  if (med.includes("Testosterone Cypionate")) {
+  if (med.includes("Test Cyp")) {
     return (
       <Tooltip content="Primary anabolic compound - long-acting testosterone ester">
         <span className="cursor-help">{med}</span>
       </Tooltip>
     );
   }
-  if (med.includes("Nandrolone")) {
+  if (med.includes("NPP")) {
     return (
       <Tooltip content="Secondary anabolic compound for enhanced recovery and joint health">
         <span className="cursor-help">{med}</span>
@@ -63,18 +62,4 @@ export function MedicationTooltip({ med }: MedicationTooltipProps): ReactNode {
     );
   }
   return <span>{med}</span>;
-}
-
-/**
- * Determines if a medication is an injection
- */
-export function isInjection(med: string): boolean {
-  return med.toLowerCase().includes("injection");
-}
-
-/**
- * Determines if a medication is a pill
- */
-export function isPill(med: string): boolean {
-  return med.toLowerCase().includes("pill");
 }

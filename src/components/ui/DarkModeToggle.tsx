@@ -3,7 +3,7 @@ import {
   MoonIcon,
   ComputerDesktopIcon,
 } from "@heroicons/react/24/outline";
-import { useDarkMode } from "../../contexts/DarkModeContext";
+import { useDarkMode } from "../../contexts/darkMode.hooks";
 
 export default function DarkModeToggle() {
   const { colorMode, setColorMode } = useDarkMode();

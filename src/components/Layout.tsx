@@ -18,7 +18,7 @@ import {
   QuestionMarkCircleIcon,
   ExclamationTriangleIcon,
 } from "@heroicons/react/24/outline";
-import { useUserPreferences } from "../contexts/UserPreferencesContext";
+import { useUserPreferences } from "../contexts/userPreferences.hooks";
 
 interface LayoutProps {
   children: ReactNode;

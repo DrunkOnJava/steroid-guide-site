@@ -9,17 +9,13 @@ import {
   CircleStackIcon,
   ArrowTrendingUpIcon,
 } from "@heroicons/react/24/outline";
-import { TooltipWrapper, Tooltip } from "./ui";
-import {
-  MedicationTooltip,
-  isInjection,
-  isPill,
-} from "../utils/medicationUtils";
+import { TooltipWrapper, Tooltip, MedicationTooltip } from "./ui";
+import { isInjection, isPill, type Medication } from "../utils/medicationUtils";
 
 interface CycleProgressProps {
   currentDay: number;
   totalDays: number;
-  medications?: string[];
+  medications?: Medication[];
   isActive: boolean;
 }
 
@@ -223,7 +219,7 @@ export default function CycleProgress({
                   )}
                 </span>
                 <div className="flex-grow">
-                  <MedicationTooltip med={med} />
+                  <MedicationTooltip med={med.name} />
                 </div>
               </li>
             ))}

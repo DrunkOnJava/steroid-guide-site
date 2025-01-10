@@ -60,7 +60,7 @@
  * - Modern browser features
  */
 
-import CycleTable from "../components/CycleTable";
+import { CycleTable } from "../components/cycle";
 import { Tooltip } from "../components/ui";
 
 export default function CycleOverview() {

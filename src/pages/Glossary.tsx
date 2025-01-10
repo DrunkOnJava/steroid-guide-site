@@ -1,141 +1,81 @@
 /**
  * @fileoverview Comprehensive terminology reference and definitions page
- * @project     Steroid Guide Site (v0.0.0)
- * @module      Glossary
- *
- * @author      Steroid Guide Team <team@steroidguide.com>
- * @contributors
- * @maintainer  Steroid Guide Team <team@steroidguide.com>
- *
- * @created     2024-03-19
- * @modified    2024-03-19
- * @version     1.0.0
- *
- * @license     MIT - see LICENSE.md file in root directory
- * @copyright   Copyright (c) 2024 Steroid Guide
- *
- * @description
- * A comprehensive glossary page providing definitions and explanations for
- * commonly used terms in steroid usage and related fields. Terms are organized
- * by categories for easier reference.
- *
- * Term Categories:
- * - Compounds (steroids, peptides, ancillaries)
- * - Basic Terms (general terminology)
- * - Cycle Terms (protocol-related)
- * - Hormone Terms (endocrine system)
- * - Side Effects (potential issues)
- * - Training Terms (exercise-related)
- * - Health Markers (monitoring metrics)
- *
- * Content Features:
- * - Categorized term organization
- * - Clear definitions
- * - Common abbreviations
- * - Technical explanations
- *
- * Educational Value:
- * - Basic terminology introduction
- * - Technical term clarification
- * - Protocol understanding
- * - Health awareness
- *
- * @example
- * ```tsx
- * import Glossary from './pages/Glossary';
- *
- * function App() {
- *   return (
- *     <Router>
- *       <Route path="/glossary" element={<Glossary />} />
- *     </Router>
- *   );
- * }
- * ```
- *
- * @dependencies
- * - react@18.3.1
- * - react-router-dom@7.1.1
- *
- * @requirements
- * - Tailwind CSS for styling
- * - GlossarySection component
- * - Modern browser features
  */
 
-import GlossarySection from "../components/GlossarySection";
-import { glossaryTerms } from "../data/glossaryTerms";
+import React, { useState, useCallback, useMemo } from "react";
+import { glossaryData } from "../features/glossary/data";
+import GlossarySection from "../features/glossary/components/GlossarySection";
+import GlossarySearch from "../features/glossary/components/GlossarySearch";
 
-export default function Glossary() {
+const Glossary: React.FC = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredSections = useMemo(() => {
+    if (!searchTerm) return glossaryData.sections;
+
+    const searchLower = searchTerm.toLowerCase();
+
+    return glossaryData.sections
+      .map((section) => {
+        const filteredTerms = Object.fromEntries(
+          Object.entries(section.terms).map(([letter, terms]) => [
+            letter,
+            terms.filter(
+              (term) =>
+                term.term.toLowerCase().includes(searchLower) ||
+                term.definition.toLowerCase().includes(searchLower) ||
+                term.abbreviation?.toLowerCase().includes(searchLower) ||
+                term.relatedTerms?.some((related) =>
+                  related.toLowerCase().includes(searchLower)
+                )
+            ),
+          ])
+        );
+
+        // Only keep letters that have matching terms
+        const nonEmptyTerms = Object.fromEntries(
+          Object.entries(filteredTerms).filter(([, terms]) => terms.length > 0)
+        );
+
+        return {
+          ...section,
+          terms: nonEmptyTerms,
+        };
+      })
+      .filter((section) => Object.keys(section.terms).length > 0);
+  }, [searchTerm]);
+
+  const handleSearch = useCallback((term: string) => {
+    setSearchTerm(term);
+  }, []);
+
   return (
-    <div className="px-4 py-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <h1 className="mb-8 text-4xl font-bold text-gray-900 dark:text-white">
-        Glossary of Terms
+    <div className="container px-4 py-8 mx-auto">
+      <h1 className="mb-8 text-4xl font-bold">
+        Comprehensive Bodybuilding Glossary
       </h1>
-      <p className="mb-8 text-lg text-gray-600 dark:text-gray-300">
-        A comprehensive guide to commonly used terms and abbreviations in the
-        field. Each term includes detailed explanations and related concepts to
-        help build a complete understanding.
-      </p>
-      <div className="grid gap-4 mb-8 md:grid-cols-2 lg:grid-cols-3">
-        <div className="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-            Compounds
-          </h2>
-          <p className="text-gray-600 dark:text-gray-300">
-            Steroids, peptides, and ancillary medications used in cycles.
+
+      <GlossarySearch onSearch={handleSearch} />
+
+      {filteredSections.length > 0 ? (
+        filteredSections.map((section) => (
+          <GlossarySection key={section.title} section={section} />
+        ))
+      ) : (
+        <div className="py-12 text-center">
+          <p className="text-xl text-gray-600 dark:text-gray-400">
+            No terms found matching "{searchTerm}"
           </p>
+          <button
+            onClick={() => setSearchTerm("")}
+            className="px-4 py-2 mt-4 text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
+          >
+            Clear search
+          </button>
         </div>
-        <div className="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-            Basic Terms
-          </h2>
-          <p className="text-gray-600 dark:text-gray-300">
-            Fundamental concepts and general terminology in the field.
-          </p>
-        </div>
-        <div className="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-            Cycle Terms
-          </h2>
-          <p className="text-gray-600 dark:text-gray-300">
-            Protocol-related terminology and cycle management concepts.
-          </p>
-        </div>
-        <div className="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-            Hormone Terms
-          </h2>
-          <p className="text-gray-600 dark:text-gray-300">
-            Endocrine system and hormone-related terminology.
-          </p>
-        </div>
-        <div className="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-            Side Effects
-          </h2>
-          <p className="text-gray-600 dark:text-gray-300">
-            Common side effects and related medical terminology.
-          </p>
-        </div>
-        <div className="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-            Training Terms
-          </h2>
-          <p className="text-gray-600 dark:text-gray-300">
-            Exercise and training-related terminology.
-          </p>
-        </div>
-        <div className="p-4 bg-white rounded-lg shadow dark:bg-gray-800">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
-            Health Markers
-          </h2>
-          <p className="text-gray-600 dark:text-gray-300">
-            Important health monitoring metrics and measurements.
-          </p>
-        </div>
-      </div>
-      <GlossarySection terms={glossaryTerms} />
+      )}
     </div>
   );
-}
+};
+
+export default Glossary;

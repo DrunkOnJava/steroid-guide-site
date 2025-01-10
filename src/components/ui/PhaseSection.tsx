@@ -4,7 +4,7 @@
  * @module      components/ui/PhaseSection
  */
 
-import { useUserPreferences } from "../../contexts/UserPreferencesContext";
+import { useUserPreferences } from "../../contexts/userPreferences.hooks";
 import { PhaseHeader } from "./PhaseHeader";
 import { TooltipWrapper } from "./TooltipWrapper";
 import type {

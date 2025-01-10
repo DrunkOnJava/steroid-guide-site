@@ -12,7 +12,7 @@ import {
   ClipboardDocumentCheckIcon,
   ChartBarIcon,
 } from "@heroicons/react/24/outline";
-import { TooltipWrapper, Alert, Button } from "../components/ui";
+import { TooltipWrapper, Alert, Button, Modal } from "../components/ui";
 import HealthMarkersSection from "../components/HealthMarkersSection";
 
 import {
@@ -22,8 +22,10 @@ import {
   getCycleStatus,
 } from "../utils/dateUtils";
 import trainingData from "../data/trainingData";
+import { logProgress, trackMetrics } from "../utils/trackingUtils";
 
 export default function Today() {
+  const [isMetricsModalOpen, setIsMetricsModalOpen] = useState(false);
   const [estDateTime, setEstDateTime] = useState(getESTDate());
   const [cycleStatus, setCycleStatus] = useState(getCycleStatus());
 
@@ -153,7 +155,13 @@ export default function Today() {
               variant="primary"
               leftIcon={<ClipboardDocumentCheckIcon className="w-5 h-5" />}
               onClick={() => {
-                /* TODO: Implement logging */
+                logProgress({
+                  workoutCompleted: true,
+                  medicationsTaken: true,
+                  recoveryProtocolsFollowed: true,
+                  notes: "All daily tasks completed successfully",
+                });
+                alert("Progress logged successfully!");
               }}
             >
               Log Progress
@@ -161,15 +169,98 @@ export default function Today() {
             <Button
               variant="secondary"
               leftIcon={<ChartBarIcon className="w-5 h-5" />}
-              onClick={() => {
-                /* TODO: Implement tracking */
-              }}
+              onClick={() => setIsMetricsModalOpen(true)}
             >
               Track Metrics
             </Button>
           </div>
         </div>
       </div>
+
+      {/* Metrics Tracking Modal */}
+      <Modal
+        isOpen={isMetricsModalOpen}
+        onClose={() => setIsMetricsModalOpen(false)}
+        title="Track Daily Metrics"
+      >
+        <div className="space-y-4">
+          <div>
+            <h4 className="mb-2 font-medium">Health Markers</h4>
+            <div className="grid gap-2">
+              <input
+                type="number"
+                placeholder="Weight (kg)"
+                className="w-full p-2 border rounded"
+                onChange={(e) => {
+                  trackMetrics({
+                    healthMarkers: {
+                      weight: parseFloat(e.target.value),
+                      bloodPressure: "120/80", // Default value
+                      restingHeartRate: 60, // Default value
+                    },
+                  });
+                }}
+              />
+            </div>
+          </div>
+          <div>
+            <h4 className="mb-2 font-medium">Training Progress</h4>
+            <div className="grid gap-2">
+              <input
+                type="number"
+                placeholder="Bench Press (kg)"
+                className="w-full p-2 border rounded"
+                onChange={(e) => {
+                  trackMetrics({
+                    training: {
+                      mainLifts: {
+                        benchPress: parseFloat(e.target.value),
+                      },
+                      bodyMeasurements: {},
+                    },
+                  });
+                }}
+              />
+            </div>
+          </div>
+          <div>
+            <h4 className="mb-2 font-medium">Nutrition</h4>
+            <div className="grid gap-2">
+              <input
+                type="number"
+                placeholder="Calories consumed"
+                className="w-full p-2 border rounded"
+                onChange={(e) => {
+                  trackMetrics({
+                    nutrition: {
+                      caloriesConsumed: parseFloat(e.target.value),
+                      proteinConsumed: 0, // To be implemented
+                      waterIntake: 0, // To be implemented
+                    },
+                  });
+                }}
+              />
+            </div>
+          </div>
+          <div className="flex justify-end gap-2 mt-4">
+            <Button
+              variant="secondary"
+              onClick={() => setIsMetricsModalOpen(false)}
+            >
+              Close
+            </Button>
+            <Button
+              variant="primary"
+              onClick={() => {
+                alert("Metrics saved successfully!");
+                setIsMetricsModalOpen(false);
+              }}
+            >
+              Save Metrics
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }

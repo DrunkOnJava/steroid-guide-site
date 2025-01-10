@@ -2,52 +2,10 @@
  * @fileoverview Context provider for managing user preferences and local storage
  */
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-
-interface UserPreferences {
-  fontSize: "small" | "medium" | "large";
-  measurementUnit: "metric" | "imperial";
-  printMode: boolean;
-  shortcuts: {
-    enabled: boolean;
-    customKeys: Record<string, string>;
-  };
-  darkMode?: boolean;
-}
-
-const defaultPreferences: UserPreferences = {
-  fontSize: "medium",
-  measurementUnit: "metric",
-  printMode: false,
-  shortcuts: {
-    enabled: true,
-    customKeys: {
-      "alt+p": "toggle-print-mode",
-      "alt+d": "toggle-dark-mode",
-      "alt+/": "toggle-shortcuts",
-      // Navigation shortcuts
-      "alt+h": "go-home",
-      "alt+s": "go-safety",
-      "alt+c": "go-compounds",
-      "alt+f": "go-faq",
-      "alt+g": "go-glossary",
-      "alt+t": "go-training",
-      "alt+o": "go-overview",
-    },
-  },
-};
-
-interface UserPreferencesContextType {
-  preferences: UserPreferences;
-  updatePreferences: (updates: Partial<UserPreferences>) => void;
-  resetPreferences: () => void;
-  togglePrintMode: () => void;
-}
-
-const UserPreferencesContext = createContext<UserPreferencesContextType | null>(
-  null
-);
+import { UserPreferences, defaultPreferences } from "./userPreferences.types";
+import { UserPreferencesContext } from "./userPreferences.context";
 
 export function UserPreferencesProvider({
   children,
@@ -62,20 +20,95 @@ export function UserPreferencesProvider({
       : defaultPreferences;
   });
 
-  const updatePreferences = (updates: Partial<UserPreferences>) => {
+  const validateFontSize = (
+    size: unknown
+  ): size is UserPreferences["fontSize"] => {
+    return (
+      typeof size === "string" && ["small", "medium", "large"].includes(size)
+    );
+  };
+
+  const validateMeasurementUnit = (
+    unit: unknown
+  ): unit is UserPreferences["measurementUnit"] => {
+    return typeof unit === "string" && ["metric", "imperial"].includes(unit);
+  };
+
+  const updatePreferences = useCallback((updates: Partial<UserPreferences>) => {
+    const validateShortcutKey = (key: string): boolean => {
+      const validKeyPattern = /^(alt\+)[a-z0-9/]$/;
+      return validKeyPattern.test(key);
+    };
+
+    const validateShortcuts = (
+      shortcuts: unknown
+    ): shortcuts is UserPreferences["shortcuts"] => {
+      if (typeof shortcuts !== "object" || shortcuts === null) return false;
+      const s = shortcuts as UserPreferences["shortcuts"];
+
+      if (typeof s.enabled !== "boolean") return false;
+      if (typeof s.customKeys !== "object" || s.customKeys === null)
+        return false;
+
+      return Object.entries(s.customKeys).every(
+        ([key, action]) =>
+          (validateShortcutKey(key) &&
+            typeof action === "string" &&
+            action.startsWith("go-")) ||
+          [
+            "toggle-print-mode",
+            "toggle-dark-mode",
+            "toggle-shortcuts",
+          ].includes(action)
+      );
+    };
+
+    // Validate each field before updating
+    if (updates.fontSize !== undefined && !validateFontSize(updates.fontSize)) {
+      throw new Error("Invalid font size value");
+    }
+
+    if (
+      updates.measurementUnit !== undefined &&
+      !validateMeasurementUnit(updates.measurementUnit)
+    ) {
+      throw new Error("Invalid measurement unit value");
+    }
+
+    if (
+      updates.printMode !== undefined &&
+      typeof updates.printMode !== "boolean"
+    ) {
+      throw new Error("Invalid print mode value");
+    }
+
+    if (
+      updates.darkMode !== undefined &&
+      typeof updates.darkMode !== "boolean"
+    ) {
+      throw new Error("Invalid dark mode value");
+    }
+
+    if (
+      updates.shortcuts !== undefined &&
+      !validateShortcuts(updates.shortcuts)
+    ) {
+      throw new Error("Invalid shortcuts configuration");
+    }
+
     setPreferences((prev) => ({ ...prev, ...updates }));
-  };
+  }, []);
 
-  const resetPreferences = () => {
+  const resetPreferences = useCallback(() => {
     setPreferences(defaultPreferences);
-  };
+  }, []);
 
-  const togglePrintMode = () => {
+  const togglePrintMode = useCallback(() => {
     setPreferences((prev) => ({
       ...prev,
       printMode: !prev.printMode,
     }));
-  };
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("userPreferences", JSON.stringify(preferences));
@@ -152,14 +185,4 @@ export function UserPreferencesProvider({
       {children}
     </UserPreferencesContext.Provider>
   );
-}
-
-export function useUserPreferences() {
-  const context = useContext(UserPreferencesContext);
-  if (!context) {
-    throw new Error(
-      "useUserPreferences must be used within a UserPreferencesProvider"
-    );
-  }
-  return context;
 }

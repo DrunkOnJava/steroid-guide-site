@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "add-headers": "node scripts/add-file-headers.js",
+    "add-headers": "node scripts/add-file-headers.mjs",
     "screenshots": "tsx scripts/generate-screenshots.ts",
     "dev": "vite",
     "generate-sitemap": "tsx scripts/generate-sitemap.ts",

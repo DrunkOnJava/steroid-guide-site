@@ -7,15 +7,13 @@ import {
   CheckCircleIcon,
   CircleStackIcon,
 } from "@heroicons/react/24/outline";
-import { Tooltip } from "./ui";
-import {
-  MedicationTooltip,
-  isInjection,
-  isPill,
-} from "../utils/medicationUtils";
+import { Tooltip, MedicationTooltip } from "./ui";
+import { isInjection, isPill } from "../utils/medicationUtils";
+
+import { Medication } from "../utils/medicationUtils";
 
 interface MedicationListProps {
-  medications: string[];
+  medications: Medication[];
 }
 
 export default function MedicationList({ medications }: MedicationListProps) {
@@ -46,7 +44,7 @@ export default function MedicationList({ medications }: MedicationListProps) {
                 <CheckCircleIcon className="w-5 h-5 text-green-500" />
               )}
             </span>
-            <MedicationTooltip med={med} />
+            <MedicationTooltip med={med.name} />
           </li>
         ))}
       </ul>

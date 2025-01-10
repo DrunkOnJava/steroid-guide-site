@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import { useUserPreferences } from "../contexts/UserPreferencesContext";
+import { useUserPreferences } from "../contexts/userPreferences.hooks";
 import { PrintControls } from "./ui/PrintControls";
 import { QRCodeDisplay } from "./ui/QRCodeDisplay";
 import { ScheduleLegend } from "./ui/ScheduleLegend";

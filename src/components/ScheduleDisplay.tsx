@@ -9,72 +9,40 @@ import {
   ClockIcon,
   CheckIcon,
 } from "@heroicons/react/24/outline";
-import { Tooltip } from "./ui";
-import { MedicationTooltip } from "../utils/medicationUtils";
-import { useState } from "react";
+import { Tooltip, MedicationTooltip } from "./ui";
+import { useState, useMemo, useCallback, memo } from "react";
 import { getESTDate, formatDate } from "../utils/dateUtils";
+import {
+  PHASE_1_MEDS,
+  PHASE_2_MEDS,
+  PHASE_3_MEDS,
+  CYCLE_START_DATE,
+  type ScheduledMedication,
+} from "../data/scheduleData";
 
-interface ScheduledMedication {
-  day: number;
-  medications: string[];
-  completed?: boolean;
+interface MedicationDayProps {
+  schedMed: ScheduledMedication;
+  isToday: boolean;
+  isCompleted: boolean;
+  onToggle: (day: number) => void;
 }
 
-const PHASE_1_MEDS: ScheduledMedication[] = [
-  {
-    day: 1,
-    medications: [
-      "Test Cyp 250 mg",
-      "NPP 100 mg",
-      "Anastrozole 0.5 mg",
-      "Semaglutide",
-    ],
-  },
-  {
-    day: 2,
-    medications: ["Anastrozole 0.5 mg"],
-  },
-  // Add more days as needed
-];
-
-const PHASE_2_MEDS: ScheduledMedication[] = [
-  {
-    day: 71,
-    medications: ["HCG 500 IU", "Semaglutide"],
-  },
-  // Add more days as needed
-];
-
-const PHASE_3_MEDS: ScheduledMedication[] = [
-  {
-    day: 92,
-    medications: ["Nolvadex 20 mg", "Clomid 50 mg", "Semaglutide"],
-  },
-  // Add more days as needed
-];
-
-export default function ScheduleDisplay() {
-  const [completedMeds, setCompletedMeds] = useState<number[]>([]);
-  const today = getESTDate();
-  const currentDay =
-    Math.floor(
-      (today.getTime() - new Date(2024, 0, 8).getTime()) / (1000 * 60 * 60 * 24)
-    ) + 1;
-
-  const toggleMedication = (day: number) => {
-    setCompletedMeds((prev) =>
-      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
+const MedicationDay = memo(
+  ({ schedMed, isToday, isCompleted, onToggle }: MedicationDayProps) => {
+    const date = useMemo(
+      () =>
+        new Date(
+          CYCLE_START_DATE.getTime() + (schedMed.day - 1) * 24 * 60 * 60 * 1000
+        ),
+      [schedMed.day]
     );
-  };
 
-  const renderMedicationDay = (schedMed: ScheduledMedication) => {
-    const isToday = schedMed.day === currentDay;
-    const isCompleted = completedMeds.includes(schedMed.day);
-    const date = new Date(2024, 0, 8 + schedMed.day - 1);
+    const buttonTitle = isCompleted
+      ? "Mark medications as incomplete"
+      : "Mark medications as complete";
 
     return (
       <div
-        key={schedMed.day}
         className={`mb-2 p-3 rounded-lg transition-colors ${
           isToday ? "bg-blue-50 dark:bg-blue-900/20" : ""
         }`}
@@ -86,13 +54,15 @@ export default function ScheduleDisplay() {
             </span>
             <div className="mt-1">
               {schedMed.medications.map((med, idx) => (
-                <MedicationTooltip key={idx} med={med} />
+                <MedicationTooltip key={`${med}-${idx}`} med={med} />
               ))}
             </div>
           </div>
           {isToday && (
             <button
-              onClick={() => toggleMedication(schedMed.day)}
+              onClick={() => onToggle(schedMed.day)}
+              title={buttonTitle}
+              aria-label={buttonTitle}
               className={`ml-4 p-2 rounded-full transition-colors ${
                 isCompleted
                   ? "bg-green-100 text-green-600 dark:bg-green-900/20 dark:text-green-400"
@@ -105,7 +75,28 @@ export default function ScheduleDisplay() {
         </div>
       </div>
     );
-  };
+  }
+);
+
+MedicationDay.displayName = "MedicationDay";
+
+export default function ScheduleDisplay() {
+  const [completedMeds, setCompletedMeds] = useState<number[]>([]);
+
+  const currentDay = useMemo(() => {
+    const today = getESTDate();
+    return (
+      Math.floor(
+        (today.getTime() - CYCLE_START_DATE.getTime()) / (1000 * 60 * 60 * 24)
+      ) + 1
+    );
+  }, []); // Empty deps since we only need to calculate this once on mount
+
+  const toggleMedication = useCallback((day: number) => {
+    setCompletedMeds((prev) =>
+      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
+    );
+  }, []);
 
   return (
     <div className="p-4 bg-white border border-gray-100 shadow-lg dark:bg-gray-900 rounded-xl dark:border-gray-800 sm:p-6">
@@ -133,7 +124,15 @@ export default function ScheduleDisplay() {
             </Tooltip>
           </h3>
           <div className="space-y-2">
-            {PHASE_1_MEDS.map(renderMedicationDay)}
+            {PHASE_1_MEDS.map((schedMed) => (
+              <MedicationDay
+                key={schedMed.day}
+                schedMed={schedMed}
+                isToday={schedMed.day === currentDay}
+                isCompleted={completedMeds.includes(schedMed.day)}
+                onToggle={toggleMedication}
+              />
+            ))}
           </div>
         </div>
 
@@ -146,7 +145,15 @@ export default function ScheduleDisplay() {
             </Tooltip>
           </h3>
           <div className="space-y-2">
-            {PHASE_2_MEDS.map(renderMedicationDay)}
+            {PHASE_2_MEDS.map((schedMed) => (
+              <MedicationDay
+                key={schedMed.day}
+                schedMed={schedMed}
+                isToday={schedMed.day === currentDay}
+                isCompleted={completedMeds.includes(schedMed.day)}
+                onToggle={toggleMedication}
+              />
+            ))}
           </div>
         </div>
 
@@ -159,7 +166,15 @@ export default function ScheduleDisplay() {
             </Tooltip>
           </h3>
           <div className="space-y-2">
-            {PHASE_3_MEDS.map(renderMedicationDay)}
+            {PHASE_3_MEDS.map((schedMed) => (
+              <MedicationDay
+                key={schedMed.day}
+                schedMed={schedMed}
+                isToday={schedMed.day === currentDay}
+                isCompleted={completedMeds.includes(schedMed.day)}
+                onToggle={toggleMedication}
+              />
+            ))}
           </div>
         </div>
       </div>

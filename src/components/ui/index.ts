@@ -80,3 +80,9 @@ export type { TooltipWrapperProps } from "./TooltipWrapper";
 
 export { StatsGrid } from "./StatsGrid";
 export type { StatsGridProps } from "./StatsGrid";
+
+export { Modal } from "./Modal";
+export type { ModalProps } from "./Modal";
+
+export { MedicationTooltip } from "./MedicationTooltip";
+export type { MedicationTooltipProps } from "./MedicationTooltip";

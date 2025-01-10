@@ -11,7 +11,7 @@ import {
   ClipboardDocumentIcon,
   CheckIcon,
 } from "@heroicons/react/24/outline";
-import { useUserPreferences } from "../contexts/UserPreferencesContext";
+import { useUserPreferences } from "../contexts/userPreferences.hooks";
 import { faqs, categories } from "../data/faqs";
 
 export default function FAQSection() {
