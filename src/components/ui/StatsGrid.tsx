@@ -1,4 +1,4 @@
-export interface Stat {
+[object Promise]export interface Stat {
   label: string;
   value: string;
   description?: string;

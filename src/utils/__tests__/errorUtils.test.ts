@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from "vitest";
+[object Promise]import { describe, it, expect, vi } from "vitest";
 import {
   ErrorType,
   ApplicationError,

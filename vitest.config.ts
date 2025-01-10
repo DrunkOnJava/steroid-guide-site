@@ -1,4 +1,4 @@
-import { defineConfig } from "vitest/config";
+[object Promise]import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   test: {

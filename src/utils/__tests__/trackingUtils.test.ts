@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+[object Promise]import { describe, it, expect } from "vitest";
 import {
   calculateAdherence,
   trackProgress,

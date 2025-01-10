@@ -1,4 +1,4 @@
-export { default as CompoundCard } from "./CompoundCard";
+[object Promise]export { default as CompoundCard } from "./CompoundCard";
 export { default as CompoundModal } from "./CompoundModal";
 export { default as CompoundTypeIndicator } from "./CompoundTypeIndicator";
 export { default as CompoundMetadata } from "./CompoundMetadata";

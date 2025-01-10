@@ -1,4 +1,4 @@
-export const nutritionFaqs = [
+[object Promise]export const nutritionFaqs = [
   {
     question: "What role does diet play during a steroid cycle?",
     answer:

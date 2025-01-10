@@ -1,4 +1,4 @@
-import { Component, ErrorInfo, ReactNode } from "react";
+[object Promise]import { Component, ErrorInfo, ReactNode } from "react";
 import { Alert } from "./ui/Alert";
 
 interface Props {

@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync } from "fs";
+[object Promise]import { existsSync, mkdirSync } from "fs";
 import { resolve } from "path";
 import puppeteer from "puppeteer";
 

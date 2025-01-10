@@ -1,4 +1,4 @@
-import { useEffect, useState, ReactNode } from "react";
+[object Promise]import { useEffect, useState, ReactNode } from "react";
 import { ColorMode } from "./darkMode.types";
 import { DarkModeContext } from "./darkMode.context";
 

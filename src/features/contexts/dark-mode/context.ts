@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+[object Promise]import { createContext, useContext } from "react";
 import { DarkModeContextType } from "./types";
 
 export const DarkModeContext = createContext<DarkModeContextType | undefined>(

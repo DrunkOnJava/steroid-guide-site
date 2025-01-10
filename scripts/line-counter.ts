@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+[object Promise]#!/usr/bin/env node
 
 import { watch } from "fs";
 import { readdir, readFile, writeFile } from "fs/promises";

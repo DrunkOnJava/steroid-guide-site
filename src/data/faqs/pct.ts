@@ -1,4 +1,4 @@
-export const pctFaqs = [
+[object Promise]export const pctFaqs = [
   {
     question: "What is post-cycle therapy (PCT), and why is it necessary?",
     answer:
