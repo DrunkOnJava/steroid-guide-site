@@ -76,6 +76,7 @@
  */
 
 import { BeakerIcon, ClockIcon, ScaleIcon } from "@heroicons/react/24/outline";
+import { Tooltip } from "./ui";
 
 interface CompoundBenefit {
   text: string;
@@ -117,8 +118,12 @@ export default function CompoundCard({
           {compound.name}
         </h3>
         <div className="relative flex items-center text-blue-50">
-          <BeakerIcon className="w-5 h-5 mr-2 transition-transform duration-300 group-hover:scale-110" />
-          <span className="font-medium tracking-wide">{compound.type}</span>
+          <Tooltip content="Classification of the compound based on its chemical structure and administration method">
+            <div className="flex items-center">
+              <BeakerIcon className="w-5 h-5 mr-2 transition-transform duration-300 group-hover:scale-110" />
+              <span className="font-medium tracking-wide">{compound.type}</span>
+            </div>
+          </Tooltip>
         </div>
       </div>
 
@@ -126,26 +131,40 @@ export default function CompoundCard({
       <div className="px-6 py-5 border-b border-gray-100/50 dark:border-gray-800/50">
         <div className="grid grid-cols-2 gap-6">
           <div className="flex items-center group/item">
-            <ClockIcon className="flex-shrink-0 w-5 h-5 mr-3 transition-colors duration-200 text-blue-500/70 group-hover/item:text-blue-600" />
-            <div className="flex flex-col">
-              <span className="text-xs font-medium text-gray-600 dark:text-gray-300 mb-0.5">
-                Half-Life
-              </span>
-              <span className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                {compound.halfLife}
-              </span>
-            </div>
+            <Tooltip content="The time it takes for half of the compound to be eliminated from the body">
+              <div className="flex items-center">
+                <ClockIcon className="flex-shrink-0 w-5 h-5 mr-3 transition-colors duration-200 text-blue-500/70 group-hover/item:text-blue-600" />
+                <div className="flex flex-col">
+                  <span className="text-xs font-medium text-gray-600 dark:text-gray-300 mb-0.5">
+                    Half-Life
+                  </span>
+                  <span className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                    {compound.halfLife}
+                  </span>
+                </div>
+              </div>
+            </Tooltip>
           </div>
           <div className="flex items-center group/item">
-            <ScaleIcon className="flex-shrink-0 w-5 h-5 mr-3 transition-colors duration-200 text-blue-500/70 group-hover/item:text-blue-600" />
-            <div className="flex flex-col">
-              <span className="text-xs font-medium text-gray-600 dark:text-gray-300 mb-0.5">
-                {compound.ratio ? "Ratio" : "Schedule"}
-              </span>
-              <span className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                {compound.ratio || compound.schedule}
-              </span>
-            </div>
+            <Tooltip
+              content={
+                compound.ratio
+                  ? "The proportion of active ingredients in the compound"
+                  : "Recommended frequency of administration"
+              }
+            >
+              <div className="flex items-center">
+                <ScaleIcon className="flex-shrink-0 w-5 h-5 mr-3 transition-colors duration-200 text-blue-500/70 group-hover/item:text-blue-600" />
+                <div className="flex flex-col">
+                  <span className="text-xs font-medium text-gray-600 dark:text-gray-300 mb-0.5">
+                    {compound.ratio ? "Ratio" : "Schedule"}
+                  </span>
+                  <span className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                    {compound.ratio || compound.schedule}
+                  </span>
+                </div>
+              </div>
+            </Tooltip>
           </div>
         </div>
       </div>
@@ -153,12 +172,16 @@ export default function CompoundCard({
       {/* Preview Benefits */}
       <div className="px-6 py-4">
         <div className="text-sm">
-          <span className="mr-1 font-semibold text-gray-900 dark:text-white">
-            Benefits:
-          </span>
-          <span className="text-gray-600 dark:text-gray-300">
-            {compound.benefits[0].text}...
-          </span>
+          <Tooltip content="Click to view all benefits and detailed information">
+            <div>
+              <span className="mr-1 font-semibold text-gray-900 dark:text-white">
+                Benefits:
+              </span>
+              <span className="text-gray-600 dark:text-gray-300">
+                {compound.benefits[0].text}...
+              </span>
+            </div>
+          </Tooltip>
         </div>
       </div>
     </div>

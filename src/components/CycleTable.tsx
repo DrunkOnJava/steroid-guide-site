@@ -79,33 +79,7 @@
  * - Parent container with defined width constraints
  */
 
-import { useState } from "react";
-
-interface TooltipProps {
-  content: string;
-  children: React.ReactNode;
-}
-
-function Tooltip({ content, children }: TooltipProps) {
-  const [show, setShow] = useState(false);
-
-  return (
-    <div className="relative inline-block">
-      <div
-        onMouseEnter={() => setShow(true)}
-        onMouseLeave={() => setShow(false)}
-        className="border-b border-gray-500 border-dotted cursor-help"
-      >
-        {children}
-      </div>
-      {show && (
-        <div className="absolute z-10 w-48 px-2 py-1 -mt-1 text-sm text-white transform -translate-x-1/2 bg-gray-900 rounded-md shadow-lg dark:bg-gray-900 dark:shadow-black/50 left-1/2">
-          {content}
-        </div>
-      )}
-    </div>
-  );
-}
+import { TooltipWrapper } from "./ui";
 
 const phaseColors = {
   main: "bg-blue-50 dark:bg-blue-950/30",
@@ -231,22 +205,42 @@ export default function CycleTable() {
   return (
     <div className="flex flex-col space-y-4">
       <div className="flex flex-wrap gap-4 text-sm text-gray-700 dark:text-gray-300">
-        <div className="flex items-center">
-          <div className="w-3 h-3 mr-2 bg-blue-500 rounded-full dark:bg-blue-400"></div>
-          <span>Primary Compounds</span>
-        </div>
-        <div className="flex items-center">
-          <div className="w-3 h-3 mr-2 bg-purple-500 rounded-full dark:bg-purple-400"></div>
-          <span>Secondary Compounds</span>
-        </div>
-        <div className="flex items-center">
-          <div className="w-3 h-3 mr-2 bg-gray-500 rounded-full dark:bg-gray-400"></div>
-          <span>Support Compounds</span>
-        </div>
-        <div className="flex items-center">
-          <div className="w-3 h-3 mr-2 bg-green-500 rounded-full dark:bg-green-400"></div>
-          <span>PCT Compounds</span>
-        </div>
+        <TooltipWrapper
+          content="Main anabolic compounds that form the foundation of the cycle"
+          position="top"
+        >
+          <div className="flex items-center">
+            <div className="w-3 h-3 mr-2 bg-blue-500 rounded-full dark:bg-blue-400"></div>
+            <span>Primary Compounds</span>
+          </div>
+        </TooltipWrapper>
+        <TooltipWrapper
+          content="Additional compounds that complement the primary compounds"
+          position="top"
+        >
+          <div className="flex items-center">
+            <div className="w-3 h-3 mr-2 bg-purple-500 rounded-full dark:bg-purple-400"></div>
+            <span>Secondary Compounds</span>
+          </div>
+        </TooltipWrapper>
+        <TooltipWrapper
+          content="Compounds used to manage side effects and optimize results"
+          position="top"
+        >
+          <div className="flex items-center">
+            <div className="w-3 h-3 mr-2 bg-gray-500 rounded-full dark:bg-gray-400"></div>
+            <span>Support Compounds</span>
+          </div>
+        </TooltipWrapper>
+        <TooltipWrapper
+          content="Post Cycle Therapy compounds to restore natural hormone production"
+          position="top"
+        >
+          <div className="flex items-center">
+            <div className="w-3 h-3 mr-2 bg-green-500 rounded-full dark:bg-green-400"></div>
+            <span>PCT Compounds</span>
+          </div>
+        </TooltipWrapper>
       </div>
 
       <div className="overflow-x-auto">
@@ -255,36 +249,61 @@ export default function CycleTable() {
             <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-800">
               <thead className="bg-gray-50 dark:bg-gray-900">
                 <tr>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400"
+                  <TooltipWrapper
+                    content="Duration of compound administration in weeks"
+                    position="top"
                   >
-                    Week
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400"
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400"
+                    >
+                      Week
+                    </th>
+                  </TooltipWrapper>
+                  <TooltipWrapper
+                    content="Name of the compound being administered"
+                    position="top"
                   >
-                    Compound
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400"
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400"
+                    >
+                      Compound
+                    </th>
+                  </TooltipWrapper>
+                  <TooltipWrapper
+                    content="How often the compound should be administered"
+                    position="top"
                   >
-                    Frequency
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400"
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400"
+                    >
+                      Frequency
+                    </th>
+                  </TooltipWrapper>
+                  <TooltipWrapper
+                    content="Amount of compound to be administered per dose"
+                    position="top"
                   >
-                    Dosage
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400"
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400"
+                    >
+                      Dosage
+                    </th>
+                  </TooltipWrapper>
+                  <TooltipWrapper
+                    content="Intended effect of the compound in the cycle"
+                    position="top"
                   >
-                    Purpose
-                  </th>
+                    <th
+                      scope="col"
+                      className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase dark:text-gray-400"
+                    >
+                      Purpose
+                    </th>
+                  </TooltipWrapper>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-900 dark:divide-gray-800">
@@ -308,7 +327,11 @@ export default function CycleTable() {
                       }`}
                     >
                       {row.tooltip ? (
-                        <Tooltip content={row.tooltip}>{row.compound}</Tooltip>
+                        <TooltipWrapper content={row.tooltip}>
+                          <span className="underline cursor-help">
+                            {row.compound}
+                          </span>
+                        </TooltipWrapper>
                       ) : (
                         row.compound
                       )}
@@ -319,9 +342,11 @@ export default function CycleTable() {
                       }`}
                     >
                       {row.frequency === "EOD" ? (
-                        <Tooltip content="Every Other Day">
-                          {row.frequency}
-                        </Tooltip>
+                        <TooltipWrapper content="Every Other Day">
+                          <span className="underline cursor-help">
+                            {row.frequency}
+                          </span>
+                        </TooltipWrapper>
                       ) : (
                         row.frequency
                       )}
@@ -331,7 +356,11 @@ export default function CycleTable() {
                         typeColors[row.type]
                       }`}
                     >
-                      {row.dosage}
+                      <TooltipWrapper
+                        content={`Recommended dosage: ${row.dosage}. Follow prescribed guidelines carefully.`}
+                      >
+                        <span className="cursor-help">{row.dosage}</span>
+                      </TooltipWrapper>
                     </td>
                     <td className={`px-6 py-4 text-sm ${typeColors[row.type]}`}>
                       {row.purpose}

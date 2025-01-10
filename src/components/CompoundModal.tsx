@@ -79,6 +79,7 @@ import {
   CheckCircleIcon,
   ExclamationTriangleIcon,
 } from "@heroicons/react/24/outline";
+import { TooltipWrapper } from "./ui";
 
 interface CompoundModalProps {
   compound: CompoundDetails | null;
@@ -101,7 +102,9 @@ export default function CompoundModal({
           <div className="grid grid-cols-2 gap-4">
             <div>
               <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                Type
+                <TooltipWrapper content="Classification of the compound based on its chemical structure and administration method">
+                  <span className="cursor-help">Type</span>
+                </TooltipWrapper>
               </h4>
               <p className="mt-1 text-sm text-gray-900 dark:text-gray-100">
                 {compound.type}
@@ -109,7 +112,9 @@ export default function CompoundModal({
             </div>
             <div>
               <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                Schedule
+                <TooltipWrapper content="Recommended frequency and timing of administration for optimal results">
+                  <span className="cursor-help">Schedule</span>
+                </TooltipWrapper>
               </h4>
               <p className="mt-1 text-sm text-gray-900 dark:text-gray-100">
                 {compound.schedule}
@@ -117,7 +122,9 @@ export default function CompoundModal({
             </div>
             <div>
               <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                Half-Life
+                <TooltipWrapper content="The time it takes for half of the compound to be eliminated from the body, which helps determine dosing frequency">
+                  <span className="cursor-help">Half-Life</span>
+                </TooltipWrapper>
               </h4>
               <p className="mt-1 text-sm text-gray-900 dark:text-gray-100">
                 {compound.halfLife}
@@ -126,7 +133,9 @@ export default function CompoundModal({
             {compound.ratio && (
               <div>
                 <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                  Ratio
+                  <TooltipWrapper content="The proportion of active ingredients in the compound, indicating its composition">
+                    <span className="cursor-help">Ratio</span>
+                  </TooltipWrapper>
                 </h4>
                 <p className="mt-1 text-sm text-gray-900 dark:text-gray-100">
                   {compound.ratio}
@@ -140,7 +149,9 @@ export default function CompoundModal({
         <div>
           <h4 className="flex items-center mb-3 text-lg font-semibold text-gray-900 dark:text-white">
             <CheckCircleIcon className="w-5 h-5 mr-2 text-green-500" />
-            Key Benefits
+            <TooltipWrapper content="Primary positive effects and outcomes expected from proper use">
+              <span className="cursor-help">Key Benefits</span>
+            </TooltipWrapper>
           </h4>
           <ul className="space-y-2">
             {compound.benefits.map((benefit, index) => (
@@ -159,7 +170,9 @@ export default function CompoundModal({
         <div>
           <h4 className="flex items-center mb-3 text-lg font-semibold text-gray-900 dark:text-white">
             <ExclamationTriangleIcon className="w-5 h-5 mr-2 text-amber-500" />
-            Considerations
+            <TooltipWrapper content="Important factors to consider including potential side effects and precautions">
+              <span className="cursor-help">Considerations</span>
+            </TooltipWrapper>
           </h4>
           <ul className="space-y-2">
             {compound.considerations.map((consideration, index) => (
@@ -178,7 +191,9 @@ export default function CompoundModal({
         {compound.storage && (
           <div className="p-4 mt-4 rounded-lg bg-blue-50 dark:bg-blue-950/50">
             <h4 className="mb-1 text-sm font-semibold text-blue-900 dark:text-blue-300">
-              Storage Requirements
+              <TooltipWrapper content="Specific conditions and methods required to maintain compound stability and effectiveness">
+                <span className="cursor-help">Storage Requirements</span>
+              </TooltipWrapper>
             </h4>
             <p className="text-sm text-blue-700 dark:text-blue-400">
               {compound.storage}
