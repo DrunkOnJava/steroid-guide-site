@@ -132,17 +132,17 @@ export default function MarkdownPage({ filePath }: MarkdownPageProps) {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[200px]">
-        <div className="w-12 h-12 border-b-2 border-blue-500 rounded-full animate-spin"></div>
+        <div className="w-12 h-12 border-b-2 rounded-full border-primary-500 animate-spin"></div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[200px] text-red-600">
+      <div className="flex flex-col items-center justify-center min-h-[200px] text-error-light dark:text-error-dark">
         <ExclamationTriangleIcon className="w-12 h-12 mb-4" />
         <p className="text-lg font-medium">Failed to load content</p>
-        <p className="text-sm text-red-500">{error}</p>
+        <p className="text-sm text-error-light dark:text-error-dark">{error}</p>
       </div>
     );
   }
@@ -150,43 +150,43 @@ export default function MarkdownPage({ filePath }: MarkdownPageProps) {
   return (
     <div className="relative markdown-content">
       <ReactMarkdown
-        className="prose prose-blue max-w-none prose-headings:scroll-mt-20 prose-h1:text-4xl prose-h1:font-extrabold prose-h2:text-3xl prose-h2:font-bold prose-h3:text-2xl prose-h3:font-semibold"
+        className="prose prose-primary max-w-none prose-headings:scroll-mt-20 prose-h1:text-4xl prose-h1:font-extrabold prose-h2:text-3xl prose-h2:font-bold prose-h3:text-2xl prose-h3:font-semibold dark:prose-invert"
         components={{
           // Headers with enhanced styling
           h1: ({ ...props }) => (
             <h1
-              className="pb-4 mb-8 text-4xl font-extrabold border-b-2 border-gray-200"
+              className="pb-4 mb-8 text-4xl font-extrabold border-b-2 border-base"
               {...props}
             />
           ),
           h2: ({ ...props }) => (
             <h2
-              className="mt-12 mb-6 text-3xl font-bold text-gray-800"
+              className="mt-12 mb-6 text-base text-3xl font-bold"
               {...props}
             />
           ),
           h3: ({ ...props }) => (
             <h3
-              className="mt-8 mb-4 text-2xl font-semibold text-gray-700"
+              className="mt-8 mb-4 text-base text-2xl font-semibold"
               {...props}
             />
           ),
           // Lists with better hierarchy and spacing
           ul: ({ ...props }) => (
             <ul
-              className="pl-6 my-6 space-y-2 list-disc marker:text-blue-500"
+              className="pl-6 my-6 space-y-2 list-disc marker:text-primary-500"
               {...props}
             />
           ),
           ol: ({ ...props }) => (
             <ol
-              className="pl-6 my-6 space-y-2 list-decimal marker:text-blue-500"
+              className="pl-6 my-6 space-y-2 list-decimal marker:text-primary-500"
               {...props}
             />
           ),
           // Enhanced paragraph styling
           p: ({ ...props }) => (
-            <p className="my-4 leading-7 text-gray-600" {...props} />
+            <p className="my-4 leading-7 text-muted" {...props} />
           ),
           // Special styling for training routines
           table: ({ ...props }) => (
@@ -199,33 +199,33 @@ export default function MarkdownPage({ filePath }: MarkdownPageProps) {
           ),
           th: ({ ...props }) => (
             <th
-              className="px-4 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase bg-gray-50"
+              className="px-4 py-3 text-xs font-medium tracking-wider text-left uppercase text-muted bg-neutral-50 dark:bg-neutral-800"
               {...props}
             />
           ),
           td: ({ ...props }) => (
             <td
-              className="px-4 py-3 text-sm text-gray-600 border-t whitespace-nowrap"
+              className="px-4 py-3 text-sm border-t text-muted border-base whitespace-nowrap"
               {...props}
             />
           ),
           // Enhanced blockquotes for important notes
           blockquote: ({ ...props }) => (
             <blockquote
-              className="py-4 pl-6 pr-4 my-6 italic text-gray-700 border-l-4 border-blue-500 rounded-r-lg bg-blue-50"
+              className="py-4 pl-6 pr-4 my-6 text-base italic border-l-4 rounded-r-lg border-primary-500 bg-primary-50 dark:bg-primary-900/20"
               {...props}
             />
           ),
           // Special styling for code and technical terms
           code: ({ ...props }) => (
             <code
-              className="px-2 py-1 font-mono text-sm text-blue-600 bg-gray-100 rounded"
+              className="px-2 py-1 font-mono text-sm rounded text-primary-600 dark:text-primary-400 bg-neutral-100 dark:bg-neutral-800"
               {...props}
             />
           ),
           pre: ({ ...props }) => (
             <pre
-              className="p-4 my-6 overflow-x-auto text-gray-100 bg-gray-800 rounded-lg"
+              className="p-4 my-6 overflow-x-auto rounded-lg text-neutral-100 bg-neutral-800 dark:bg-neutral-900"
               {...props}
             />
           ),
@@ -237,8 +237,8 @@ export default function MarkdownPage({ filePath }: MarkdownPageProps) {
               const [term, definition] = text.split(": ");
               return (
                 <li className="my-4">
-                  <span className="font-semibold text-gray-900">{term}: </span>
-                  <span className="text-gray-600">{definition}</span>
+                  <span className="text-base font-semibold">{term}: </span>
+                  <span className="text-muted">{definition}</span>
                 </li>
               );
             }
@@ -249,13 +249,13 @@ export default function MarkdownPage({ filePath }: MarkdownPageProps) {
               text.toLowerCase().includes("danger")
             ) {
               return (
-                <li className="p-4 my-4 border-l-4 border-red-500 rounded-r-lg bg-red-50">
+                <li className="p-4 my-4 border-l-4 rounded-r-lg border-error-light dark:border-error-dark bg-error-light/10 dark:bg-error-dark/10">
                   {props.children}
                 </li>
               );
             }
             // Default list item styling
-            return <li className="my-2 text-gray-600" {...props} />;
+            return <li className="my-2 text-muted" {...props} />;
           },
         }}
       >
@@ -265,7 +265,7 @@ export default function MarkdownPage({ filePath }: MarkdownPageProps) {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed p-3 text-white transition-colors bg-blue-500 rounded-full shadow-lg bottom-8 right-8 hover:bg-blue-600"
+          className="fixed p-3 text-white transition-colors rounded-full shadow-lg bg-primary-500 bottom-8 right-8 hover:bg-primary-600"
           aria-label="Scroll to top"
         >
           <ArrowUpIcon className="w-6 h-6" />

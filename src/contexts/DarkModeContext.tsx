@@ -1,22 +1,6 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  ReactNode,
-} from "react";
-
-type ColorMode = "light" | "dark" | "system";
-
-interface DarkModeContextType {
-  isDarkMode: boolean;
-  colorMode: ColorMode;
-  setColorMode: (mode: ColorMode) => void;
-}
-
-const DarkModeContext = createContext<DarkModeContextType | undefined>(
-  undefined
-);
+import { useEffect, useState, ReactNode } from "react";
+import { ColorMode } from "./darkMode.types";
+import { DarkModeContext } from "./darkMode.context";
 
 export function DarkModeProvider({ children }: { children: ReactNode }) {
   const [colorMode, setColorMode] = useState<ColorMode>(() => {
@@ -54,12 +38,4 @@ export function DarkModeProvider({ children }: { children: ReactNode }) {
       {children}
     </DarkModeContext.Provider>
   );
-}
-
-export function useDarkMode() {
-  const context = useContext(DarkModeContext);
-  if (context === undefined) {
-    throw new Error("useDarkMode must be used within a DarkModeProvider");
-  }
-  return context;
 }

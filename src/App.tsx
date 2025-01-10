@@ -50,40 +50,96 @@
  * - Content markdown files in /public/content/
  */
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { DarkModeProvider } from "./contexts/DarkModeContext";
+import { UserPreferencesProvider } from "./contexts/UserPreferencesContext";
+import { ProfileProvider } from "./contexts/ProfileContext";
+import { lazy, Suspense, useEffect } from "react";
+import "./styles/print.css";
 import Layout from "./components/Layout";
-import MarkdownPage from "./components/MarkdownPage";
-import Today from "./pages/Today";
-import TrainingNutrition from "./pages/TrainingNutrition";
-import CycleOverview from "./pages/CycleOverview";
-import Safety from "./pages/Safety";
-import Glossary from "./pages/Glossary";
-import Compounds from "./pages/Compounds";
-import Schedule from "./pages/Schedule";
-import ComponentDemo from "./pages/ComponentDemo";
+import Safety from "./pages/Safety"; // Keep Safety eagerly loaded for emergency access
+
+// Lazy load other components
+const MarkdownPage = lazy(() => import("./components/MarkdownPage"));
+const Today = lazy(() => import("./pages/Today"));
+const TrainingNutrition = lazy(() => import("./pages/TrainingNutrition"));
+const CycleOverview = lazy(() => import("./pages/CycleOverview"));
+const Glossary = lazy(() => import("./pages/Glossary"));
+const Compounds = lazy(() => import("./pages/Compounds"));
+const Schedule = lazy(() => import("./pages/Schedule"));
+const ComponentDemo = lazy(() => import("./pages/ComponentDemo"));
+const UIDemo = lazy(() => import("./pages/UIDemo"));
+const FAQ = lazy(() => import("./pages/FAQ"));
+
+// Loading fallback component
+function LoadingFallback() {
+  return (
+    <div className="flex items-center justify-center min-h-[50vh]">
+      <div className="w-16 h-16 border-4 border-blue-200 rounded-full border-t-blue-600 animate-spin" />
+    </div>
+  );
+}
 
 export default function App() {
+  useEffect(() => {
+    // Add mobile viewport meta tag
+    const viewport = document.createElement("meta");
+    viewport.name = "viewport";
+    viewport.content =
+      "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover";
+    document.head.appendChild(viewport);
+
+    // Register service worker for offline support
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("/service-worker.js")
+          .then((registration) => {
+            console.log("SW registered:", registration);
+          })
+          .catch((error) => {
+            console.log("SW registration failed:", error);
+          });
+      });
+    }
+
+    return () => {
+      // Cleanup viewport meta tag on unmount
+      document.head.removeChild(viewport);
+    };
+  }, []);
+
   return (
     <DarkModeProvider>
-      <Router>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Today />} />
-            <Route
-              path="/introduction"
-              element={<MarkdownPage filePath="/content/01_introduction.md" />}
-            />
-            <Route path="/cycle-overview" element={<CycleOverview />} />
-            <Route path="/compounds" element={<Compounds />} />
-            <Route path="/training-nutrition" element={<TrainingNutrition />} />
-            <Route path="/glossary" element={<Glossary />} />
-            <Route path="/safety" element={<Safety />} />
-            <Route path="/schedule" element={<Schedule />} />
-            <Route path="/components" element={<ComponentDemo />} />
-          </Routes>
-        </Layout>
-      </Router>
+      <UserPreferencesProvider>
+        <ProfileProvider>
+          <Layout>
+            <Suspense fallback={<LoadingFallback />}>
+              <Routes>
+                <Route path="/" element={<Today />} />
+                <Route
+                  path="/introduction"
+                  element={
+                    <MarkdownPage filePath="/content/01_introduction.md" />
+                  }
+                />
+                <Route path="/cycle-overview" element={<CycleOverview />} />
+                <Route path="/compounds" element={<Compounds />} />
+                <Route
+                  path="/training-nutrition"
+                  element={<TrainingNutrition />}
+                />
+                <Route path="/glossary" element={<Glossary />} />
+                <Route path="/safety" element={<Safety />} />
+                <Route path="/schedule" element={<Schedule />} />
+                <Route path="/components" element={<ComponentDemo />} />
+                <Route path="/ui" element={<UIDemo />} />
+                <Route path="/faq" element={<FAQ />} />
+              </Routes>
+            </Suspense>
+          </Layout>
+        </ProfileProvider>
+      </UserPreferencesProvider>
     </DarkModeProvider>
   );
 }

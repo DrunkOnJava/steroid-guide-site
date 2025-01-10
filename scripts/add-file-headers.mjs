@@ -1,9 +1,9 @@
-[object Promise]#!/usr/bin/env node
+#!/usr/bin/env node
 
 /**
  * @fileoverview Script to automatically add standardized headers to all TypeScript and JavaScript files in the project
  * @project     Steroid Guide Site (v1.0.0)
- * @module      add-file-headers.js/add-file-headers.js
+ * @module      scripts/add-file-headers.mjs
  *
  * @author      [Your Name] <your.email@example.com>
  * @contributors
@@ -126,9 +126,11 @@ const generateHeader = async (filePath) => {
 
   // Get imports and dependencies
   const imports = await getFileImports(filePath);
-  const packageJson = JSON.parse(
-    await fs.readFile(path.join(PROJECT_ROOT, "package.json"), "utf8")
+  const packageJsonContent = await fs.readFile(
+    path.join(PROJECT_ROOT, "package.json"),
+    "utf8"
   );
+  const packageJson = JSON.parse(packageJsonContent);
   const dependencies = getPackageDependencies(imports, packageJson);
 
   // Generate appropriate description
@@ -164,7 +166,7 @@ const generateHeader = async (filePath) => {
  * ${description}
  *
  * @example
- * \`\`\`js
+ * \`\`\`typescript
  * ${example}
  * \`\`\`
  *

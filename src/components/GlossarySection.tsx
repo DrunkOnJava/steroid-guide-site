@@ -77,12 +77,12 @@
 
 import { useState, useMemo } from "react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { CategorySection } from "./ui/CategorySection";
+import type { Term } from "./ui/CategorySection";
 
-interface GlossaryTerm {
-  term: string;
-  definition: string;
+type GlossaryTerm = Term & {
   category: string;
-}
+};
 
 interface GlossarySectionProps {
   terms: GlossaryTerm[];
@@ -139,26 +139,24 @@ export default function GlossarySection({ terms }: GlossarySectionProps) {
         </select>
       </div>
 
-      {/* Terms Grid */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {filteredTerms.map((term, index) => (
-          <div
-            key={index}
-            className="p-4 transition-shadow duration-200 bg-white rounded-lg shadow-md hover:shadow-lg dark:bg-gray-900 dark:border dark:border-gray-800 dark:shadow-gray-900/50"
-          >
-            <div className="flex items-start justify-between">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                {term.term}
-              </h3>
-              <span className="px-2 py-1 text-xs font-medium text-blue-600 bg-blue-100 rounded-full dark:text-blue-300 dark:bg-blue-900/50">
-                {term.category}
-              </span>
-            </div>
-            <p className="mt-2 text-gray-600 dark:text-gray-300">
-              {term.definition}
-            </p>
-          </div>
-        ))}
+      {/* Terms by Category */}
+      <div className="space-y-12">
+        {categories
+          .filter((category) => category !== "all")
+          .map((category) => {
+            const categoryTerms = filteredTerms.filter(
+              (term) => term.category === category
+            );
+            if (categoryTerms.length === 0) return null;
+
+            return (
+              <CategorySection
+                key={category}
+                category={category}
+                terms={categoryTerms}
+              />
+            );
+          })}
       </div>
 
       {/* No Results Message */}

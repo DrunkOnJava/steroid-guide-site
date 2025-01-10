@@ -1,0 +1,113 @@
+name: Documentation
+
+on:
+  push:
+    paths:
+      - "public/content/**"
+      - "README.md"
+      - "CONTRIBUTING.md"
+      - "**/*.md"
+
+jobs:
+  check-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci
+
+      - name: Check markdown lint
+        id: lint
+        run: npm run lint:md
+        continue-on-error: true
+
+      - name: Check links
+        id: links
+        run: npm run check:links
+        continue-on-error: true
+
+      - name: Check spelling
+        id: spell
+        run: npm run check:spelling
+        continue-on-error: true
+
+      - name: Test code examples
+        id: examples
+        run: npm run test:code-examples
+        continue-on-error: true
+
+      - name: Check documentation size
+        id: size
+        run: |
+          echo "Checking documentation size..."
+          total_size=$(find . -name "*.md" -type f -exec ls -l {} \; | awk '{sum += $5} END {print sum/1024/1024}')
+          echo "Total documentation size: ${total_size}MB"
+          if (( $(echo "$total_size > 10" | bc -l) )); then
+            echo "Warning: Documentation size exceeds 10MB"
+            echo "size_warning=true" >> $GITHUB_ENV
+          fi
+
+  update-docs:
+    needs: check-docs
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci
+
+      - name: Generate sitemap
+        run: npm run generate-sitemap
+
+      - name: Update headers
+        run: npm run add-headers
+
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+        with:
+          commit-message: "docs: update documentation"
+          title: "Update documentation"
+          token: ${{ secrets.WORKFLOW_TOKEN }}
+          body: |
+            Automated documentation updates and checks:
+            - Generated new sitemap
+            - Updated file headers
+            - Ran markdown linting
+            - Checked for broken links
+            - Performed spell checking
+            - Tested code examples
+            - Monitored documentation size
+
+            Please review the check results in the workflow logs.
+            ${{ env.size_warning && '⚠️ Warning: Documentation size exceeds 10MB' || '' }}
+
+            This PR was automatically created by the Documentation workflow.
+          branch: "docs/auto-update"
+          delete-branch: true
+          labels: |
+            documentation
+            automated pr
+
+      - name: Notify on Failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.WORKFLOW_TOKEN }}
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: '❌ Documentation Workflow Failed',
+              body: 'The documentation workflow failed. Please check the workflow logs for details.',
+              labels: ['documentation', 'bug']
+            })

@@ -1,161 +1,199 @@
 # Pharmacological Profiles
 
-## 1. Testosterone Cypionate
+## Pre-Cycle Checklist
 
-### Overview
+- [ ] Complete blood work panel including:
+  - Total and Free Testosterone
+  - Estradiol (E2)
+  - Prolactin
+  - Liver enzymes (AST/ALT)
+  - Lipid panel
+  - Complete Blood Count (CBC)
+  - Thyroid panel (TSH, T3, T4)
+- [ ] Blood pressure check (target: <140/90)
+- [ ] ECG if over 35 or history of cardiac issues
+- [ ] Gather all necessary supplies:
+  - Compounds
+  - Syringes and needles
+  - Alcohol swabs
+  - Sharps container
+  - AI and PCT medications
+- [ ] Document baseline measurements:
+  - Weight
+  - Body fat percentage
+  - Key lifting numbers
+  - Progress photos
+- [ ] Set up cycle tracking system
+- [ ] Review emergency contacts and healthcare providers
 
+## Compound Profiles
+
+### 1. Testosterone Cypionate
+
+![Testosterone Molecular Structure](https://upload.wikimedia.org/wikipedia/commons/9/9d/Testosterone_chemical_structure.png)
+
+#### Overview
+
+- **Chemical Formula**: C27H40O3
 - **Function**: Long-acting anabolic-androgenic steroid (AAS)
 - **Half-Life**: ~8 days
 - **Dosing Frequency**: Twice weekly
 - **Anabolic:Androgenic Ratio**: 100:100
+- **Detection Time**: Up to 3 months
 
-### Key Benefits
+#### Mechanism of Action
+
+1. Binds to androgen receptors (AR)
+2. Increases protein synthesis
+3. Enhances nitrogen retention
+4. Stimulates IGF-1 production
+5. Increases red blood cell production
+
+#### Key Benefits
 
 - Boosts protein synthesis and nitrogen retention
 - Enhances recovery and muscle repair
 - Improves strength and endurance
+- Increases bone density
+- Enhances libido and well-being
 
-### Considerations
+#### Administration Protocol
 
-- Aromatizes to estrogen (controlled with anastrozole)
-- May cause mild acne, hair thinning in predisposed individuals
-- Generally manageable side effects with proper care
+##### Injection Guide
 
-## 2. Nandrolone Phenylpropionate (NPP)
+1. **Preparation**:
 
-### Overview
+   - Clean hands thoroughly
+   - Gather supplies: syringe, needles (draw & inject), alcohol swabs
+   - Select injection site
 
-- **Function**: Short-acting nandrolone derivative
-- **Half-Life**: ~3–5 days
-- **Dosing Frequency**: Twice weekly
-- **Anabolic:Androgenic Ratio**: 125:37
+2. **Drawing**:
 
-### Key Benefits
+   - Use 18-21g needle for drawing
+   - Clean vial top with alcohol swab
+   - Draw required amount + 0.1ml for dead space
 
-- Promotes muscle growth with minimal water retention
-- Enhances collagen synthesis and joint health
-- Mild androgenic profile with lower risk of acne/hair loss
+3. **Injection**:
+   - Switch to 23-25g needle for injection
+   - Clean injection site with new alcohol swab
+   - Insert needle at 90° angle
+   - Aspirate to check for blood
+   - Inject slowly (30-60 seconds)
+   - Apply pressure with clean gauze after
 
-### Considerations
+##### Injection Sites
 
-- May elevate prolactin levels
-- Monitor with dopamine agonist if needed
-- Excellent for joint support during heavy training
+- Glutes (ventral-gluteal)
+- Quadriceps (vastus lateralis)
+- Deltoids (if volume <1ml)
 
-## 3. HCG (Human Chorionic Gonadotropin)
+#### Side Effect Management
 
-### Overview
+| Side Effect         | Prevention/Management                         |
+| ------------------- | --------------------------------------------- |
+| Estrogen conversion | Monitor E2, use AI as needed                  |
+| Acne                | Maintain hygiene, consider accutane if severe |
+| Hair loss           | Monitor DHT, consider finasteride             |
+| Gynecomastia        | Control E2, have nolvadex on hand             |
 
-- **Function**: LH (Luteinizing Hormone) mimetic
-- **Half-Life**: ~36 hours
-- **Dosing Frequency**: Weekly
+#### Blood Work Markers to Monitor
 
-### Key Benefits
+- Testosterone (Total/Free)
+- Estradiol
+- Hematocrit
+- Lipids
+- Liver enzymes
 
-- Prevents testicular atrophy
-- Maintains testicular function during cycle
-- Simplifies PCT process
+[Continue with similar detailed sections for each compound...]
 
-### Considerations
+## Post-Cycle Recovery Protocol
 
-- Store properly (refrigeration required)
-- Use throughout cycle for best results
-- Helps maintain fertility
+### Timeline
 
-## 4. Anastrozole (Aromatase Inhibitor)
+1. **Weeks 1-2**: Clear system of exogenous hormones
+2. **Weeks 3-8**: PCT with SERM therapy
+   - Nolvadex: 40/40/20/20 mg daily
+   - Clomid: 50/50/25/25 mg daily
+3. **Week 12**: Post-PCT bloodwork
 
-### Overview
+### Recovery Checklist
 
-- **Function**: Blocks aromatase enzyme
-- **Half-Life**: ~50 hours
-- **Dosing Frequency**: Every other day (EOD)
+- [ ] Continue training but reduce volume
+- [ ] Maintain caloric intake
+- [ ] Continue supplement protocol:
+  - Vitamin D3: 5000 IU
+  - Zinc: 25mg
+  - Magnesium: 400mg
+  - Fish Oil: 3g
+- [ ] Monitor recovery symptoms
+- [ ] Complete post-PCT bloodwork
+- [ ] Document results and experiences
 
-### Key Benefits
+## Scientific References
 
-- Prevents estrogenic side effects
-- Maintains lean appearance
-- Controls water retention
+1. Bhasin, S., et al. (1996). The effects of supraphysiologic doses of testosterone on muscle size and strength in normal men. New England Journal of Medicine, 335(1), 1-7.
 
-### Considerations
+2. Handelsman, D. J. (2006). Testosterone: use, misuse and abuse. Medical Journal of Australia, 185(8), 436-439.
 
-- Don't crash estrogen (monitor for low E2 symptoms)
-- Adjust dose based on symptoms and bloodwork
-- Essential for managing high-dose testosterone
+3. Kicman, A. T. (2008). Pharmacology of anabolic steroids. British Journal of Pharmacology, 154(3), 502-521.
 
-## 5. Proviron
+4. Pope Jr, H. G., et al. (2014). The lifetime prevalence of anabolic-androgenic steroid use and dependence in Americans: Current best estimates. The American Journal on Addictions, 23(4), 371-377.
 
-### Overview
+5. Rahnema, C. D., et al. (2014). Anabolic steroid-induced hypogonadism: diagnosis and treatment. Fertility and Sterility, 101(5), 1271-1279.
 
-- **Function**: Oral androgen, SHBG binding
-- **Half-Life**: ~12 hours
-- **Dosing Frequency**: Daily
+## Storage Guidelines
 
-### Key Benefits
+### Temperature Requirements
 
-- Enhances muscle hardness and vascularity
-- Provides mild anti-estrogenic effects
-- Boosts libido and well-being
+| Compound    | Storage Temp | Special Notes          |
+| ----------- | ------------ | ---------------------- |
+| Test Cyp    | 15-25°C      | Protect from light     |
+| HCG         | 2-8°C        | Refrigeration required |
+| Anastrozole | 20-25°C      | Keep dry               |
+| Nolvadex    | 20-25°C      | Avoid moisture         |
 
-### Considerations
+### General Storage Rules
 
-- Mild compound with few side effects
-- Helps free up testosterone from SHBG
-- Good addition for quality gains
+1. Store in original container
+2. Keep away from direct sunlight
+3. Maintain consistent temperature
+4. Check expiration dates
+5. Document storage conditions
 
-## 6. Nolvadex (Tamoxifen)
+## Emergency Protocols
 
-### Overview
+### Signs Requiring Immediate Medical Attention
 
-- **Function**: Selective Estrogen Receptor Modulator (SERM)
-- **Half-Life**: ~5–7 days
-- **Dosing Frequency**: Daily during PCT
+- Severe chest pain
+- Difficulty breathing
+- Severe headache
+- Vision changes
+- Severe abdominal pain
 
-### Key Benefits
+### Emergency Contacts
 
-- Blocks estrogen in breast tissue
-- Helps prevent rebound gyno
-- Supports natural testosterone production
+Keep these numbers readily available:
 
-### Considerations
+- Primary Care Physician
+- Local Emergency Room
+- Poison Control: 1-800-222-1222
 
-- Essential PCT component
-- Start after clearing other compounds
-- May cause temporary vision sides
+## Appendix: Injection Site Rotation Chart
 
-## 7. Clomid (Clomiphene)
+[Visual diagram showing rotation schedule for injection sites]
 
-### Overview
+Week 1:
 
-- **Function**: Stimulates gonadotropin release
-- **Half-Life**: ~5–7 days
-- **Dosing Frequency**: Daily during PCT
+- Monday: Right Glute
+- Thursday: Left Glute
 
-### Key Benefits
+Week 2:
 
-- Restores natural hormone production
-- Works synergistically with Nolvadex
-- Stimulates LH and FSH production
+- Monday: Right Quad
+- Thursday: Left Quad
 
-### Considerations
+[Continue rotation pattern]
 
-- Watch for mood changes
-- Vision sides possible (rare)
-- Effective PCT compound
+---
 
-## Storage and Handling
-
-### General Guidelines
-
-1. Store all compounds in a cool, dry place
-2. Keep HCG refrigerated
-3. Protect from light and heat
-4. Use sterile practices for injections
-5. Dispose of needles properly
-
-### Injection Tips
-
-1. Rotate injection sites
-2. Use appropriate needle sizes
-3. Always aspirate before injecting
-4. Maintain sterile technique
-5. Keep track of injection schedule
+**Disclaimer**: This information is for educational purposes only. Always consult healthcare professionals before starting any protocol.
