@@ -48,6 +48,9 @@
  * - TypeScript for type definitions
  */
 
+export { Alert } from "./Alert";
+export type { AlertProps } from "./Alert";
+
 export { Badge } from "./Badge";
 export type { BadgeProps } from "./Badge";
 
@@ -68,3 +71,12 @@ export type { InputProps } from "./Input";
 
 export { Select } from "./Select";
 export type { SelectProps, SelectOption } from "./Select";
+
+export { Tooltip } from "./Tooltip";
+export type { TooltipProps } from "./Tooltip";
+
+export { TooltipWrapper } from "./TooltipWrapper";
+export type { TooltipWrapperProps } from "./TooltipWrapper";
+
+export { StatsGrid } from "./StatsGrid";
+export type { StatsGridProps } from "./StatsGrid";
