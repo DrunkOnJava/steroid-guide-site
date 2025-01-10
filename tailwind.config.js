@@ -5,17 +5,54 @@ export default {
   theme: {
     extend: {
       colors: {
-        blue: {
+        // Primary brand colors
+        primary: {
           50: "#f0f7ff",
           100: "#e0efff",
           200: "#b9dfff",
           300: "#7cc5ff",
           400: "#36a7ff",
-          500: "#0090ff",
+          500: "#0090ff", // Primary brand color
           600: "#0070f3",
           700: "#0058cc",
           800: "#0046a6",
           900: "#003380",
+        },
+        // Neutral colors for text and backgrounds
+        neutral: {
+          50: "#f8fafc",
+          100: "#f1f5f9",
+          200: "#e2e8f0",
+          300: "#cbd5e1",
+          400: "#94a3b8",
+          500: "#64748b",
+          600: "#475569",
+          700: "#334155",
+          800: "#1e293b",
+          900: "#0f172a",
+          950: "#020617",
+        },
+        // Surface colors for different elevation levels
+        surface: {
+          light: "#ffffff",
+          dark: "#121212",
+          elevated: {
+            light: "#ffffff",
+            dark: "#1e1e1e",
+          },
+        },
+        // Semantic colors
+        success: {
+          light: "#22c55e",
+          dark: "#4ade80",
+        },
+        warning: {
+          light: "#f59e0b",
+          dark: "#fbbf24",
+        },
+        error: {
+          light: "#ef4444",
+          dark: "#fb7185",
         },
       },
       spacing: {
@@ -30,14 +67,14 @@ export default {
         DEFAULT: {
           css: {
             maxWidth: "100ch",
-            color: "rgb(55 65 81)",
+            color: "rgb(var(--color-text-base))",
             fontSize: "1.075rem",
             lineHeight: "1.75",
           },
         },
         dark: {
           css: {
-            color: "rgb(209 213 219)",
+            color: "rgb(var(--color-text-dark))",
             '[class~="lead"]': {
               color: "rgb(209 213 219)",
             },

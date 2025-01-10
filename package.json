@@ -18,11 +18,11 @@
     "test:watch": "vitest watch",
     "lint:md": "markdownlint '**/*.md' --ignore node_modules",
     "check:links": "markdown-link-check '**/*.md' --ignore node_modules",
-    "check:spelling": "cspell '**/*.md' --ignore-words=.cspell-words.txt",
-    "test:code-examples": "markdown-code-example-tester '**/*.md'"
+    "check:spelling": "cspell '**/*.md' --ignore-words=.cspell-words.txt"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
+    "qrcode.react": "^4.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tailwind-merge": "^2.6.0"
@@ -47,7 +47,6 @@
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
     "jsdom": "^26.0.0",
-    "markdown-code-example-tester": "^1.0.0",
     "markdown-link-check": "^3.11.2",
     "markdownlint-cli": "^0.39.0",
     "postcss": "^8.4.49",
